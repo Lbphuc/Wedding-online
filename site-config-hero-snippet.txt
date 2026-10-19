@@ -1,0 +1,13 @@
+Thêm các thuộc tính dưới đây bên trong object window.WEDDING_CONFIG trong site-config.js (ví dụ ngay sau brideInitial). Nếu bạn dùng full project ZIP thì các thuộc tính đã có sẵn.
+
+  // Ảnh ngang làm background cho toàn bộ Hero.
+  heroImage: "assets/images/wedding-hero.jpg",
+  // 70% chiều ngang dành cho thông tin; khoảng 30% còn lại là vùng nhấn mạnh chủ thể trong ảnh. Hợp lệ từ 60% đến 80%.
+  heroInfoWidth: "70%",
+  // "right": cặp đôi bên phải, thông tin bên trái; "left": cặp đôi bên trái, thông tin tự chuyển sang phải.
+  heroSubjectSide: "right",
+  // Để trống để tự căn; ví dụ override: "70% center".
+  heroBackgroundPosition: "",
+  heroMobileBackgroundPosition: "",
+
+Lưu ý: để tên cô dâu/chú rể ở cùng một hàng trên desktop và tự co cỡ chữ theo màn hình. Trên màn hình cực hẹp, cần kiểm tra với tên thật dài. Nếu chưa có ảnh trong assets/images/wedding-hero.jpg, hãy để heroImage: "".

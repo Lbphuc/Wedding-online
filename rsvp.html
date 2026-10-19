@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F3F2E8">
+  <meta name="description" content="Xác nhận tham dự và sổ lưu bút — bản giao diện tĩnh.">
+  <title>Xác nhận tham dự & Sổ lưu bút | Thiệp cưới</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=great-vibes-story-photo-fix-20261019-02">
+  <link rel="stylesheet" href="design-system.css?v=great-vibes-story-photo-fix-20261019-02">
+  <link rel="stylesheet" href="responsive.css?v=great-vibes-story-photo-fix-20261019-02">
+<meta http-equiv="refresh" content="0; url=index.html#rsvp">
+  <script>window.location.replace("index.html#rsvp");</script>
+
+</head>
+
+<body>
+  <div class="top-note" data-i18n="topNote">BẢN GIAO DIỆN TĨNH · NỘI DUNG MẪU CÓ THỂ THAY ĐỔI</div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Về trang chủ"><span data-config="groomInitial">T</span><span class="brand-heart">♥</span><span data-config="brideInitial">M</span></a>
+    <nav class="main-nav" aria-label="Điều hướng chính">
+      <a href="index.html#hero" data-i18n="navHome">Trang chủ</a>
+      <a href="index.html#story" data-i18n="navStory">Câu chuyện</a>
+      <a href="index.html#schedule" data-i18n="navSchedule">Lịch trình</a>
+      <a href="index.html#gallery" data-i18n="navGallery">Album ảnh</a>
+      <a href="index.html#guestbook" data-i18n="navGuestbook">Sổ lưu bút</a>
+      <a class="nav-cta active-cta" href="index.html#rsvp" data-i18n-html="navRsvp">Xác nhận tham dự <span>↓</span></a>
+    </nav>
+    <div class="header-actions">
+      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Chuyển đổi ngôn ngữ / Switch language" title="Chuyển đổi ngôn ngữ / Switch language">
+        <span class="lang-opt active" data-lang="vi">VI</span>
+        <span class="lang-sep">|</span>
+        <span class="lang-opt" data-lang="en">EN</span>
+      </button>
+      <button class="music-toggle" type="button" aria-label="Nút nhạc minh họa" title="Nút nhạc minh họa">♫ <span class="toggle-pill"><i></i></span></button>
+    </div>
+  </header>
+
+  <main class="rsvp-page">
+    <section class="rsvp-hero">
+      <img class="floral rsvp-hero-left" src="assets/botanical/olive-sprig.webp" alt="" aria-hidden="true">
+      <img class="floral rsvp-hero-right" src="assets/botanical/olive-sprig.webp" alt="" aria-hidden="true">
+      <p class="section-kicker">LỜI NHẮN YÊU THƯƠNG</p>
+      <h1>Gửi lời chúc</h1>
+      <p>và xác nhận tham dự của bạn</p>
+      <div class="divider-heart"><span></span><b>♥</b><span></span></div>
+      <p class="rsvp-intro">Sự hiện diện và những lời chúc của bạn là món quà vô giá đối với chúng tôi.</p>
+    </section>
+
+    <section class="rsvp-form-section section-shell section-pad">
+      <div class="section-heading-centered">
+        <p class="section-kicker" data-i18n="rsvpKicker">PHẢN HỒI THAM DỰ</p>
+        <h2 data-i18n="rsvpTitle">Xác nhận tham dự</h2>
+        <p data-i18n="rsvpSubtitle">Vui lòng điền thông tin bên dưới để chúng tôi chuẩn bị chu đáo nhất.</p>
+      </div>
+      <div class="rsvp-layout">
+        <form class="form-card" id="rsvp-form">
+          <div class="form-grid two-col">
+            <label><span data-i18n-html="rsvpLabelName">Họ và tên <span>*</span></span><input name="guestName" required placeholder="Nhập họ và tên của bạn" data-i18n-ph="rsvpPhName"></label>
+            <label><span data-i18n-html="rsvpLabelPhone">Số điện thoại <small>(không bắt buộc)</small></span><input name="phone" type="tel" placeholder="Nhập số điện thoại" data-i18n-ph="rsvpPhPhone"></label>
+          </div>
+          <div class="form-grid two-col form-attend-row">
+            <fieldset class="attend-fieldset">
+              <legend data-i18n-html="rsvpLegendAttend">Bạn có tham dự không? <span>*</span></legend>
+              <label class="radio-line"><input type="radio" name="attending" value="yes" checked> <span data-i18n="rsvpAttendYes">Có, tôi sẽ tham dự</span></label>
+              <label class="radio-line"><input type="radio" name="attending" value="no"> <span data-i18n="rsvpAttendNo">Rất tiếc, tôi không thể tham dự</span></label>
+            </fieldset>
+            <label class="guest-count-label" id="guest-count-group">
+              <span data-i18n="rsvpLabelGuests">Số người đi cùng (bao gồm bạn)</span>
+              <select name="guestCount" id="guest-count-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+          </div>
+          <label><span data-i18n-html="rsvpLabelNote">Ghi chú <small>(tùy chọn)</small></span><textarea name="note" rows="3" placeholder="Lời nhắn, yêu cầu đặc biệt..." data-i18n-ph="rsvpPhNote"></textarea></label>
+          <button class="primary-button full-button" type="submit" data-i18n-html="rsvpBtnSubmit">Gửi xác nhận <span>→</span></button>
+          <p class="form-disclaimer" data-i18n="rsvpDisclaimer">Bản giao diện tĩnh: dữ liệu chưa được gửi hoặc lưu lại.</p>
+        </form>
+        <aside class="thankyou-card">
+          <div class="envelope-icon">♡</div>
+          <h3 data-i18n="thankyouTitle">Cảm ơn bạn</h3>
+          <p data-i18n-html="thankyouText">đã dành thời gian<br>để gửi lời chúc và xác nhận tham dự!</p>
+          <div class="divider-heart"><span></span><b>♥</b><span></span></div>
+          <img class="floral thankyou-floral-petal" src="assets/botanical/olive-sprig.webp" alt="" aria-hidden="true">
+          <img class="floral thankyou-floral" src="assets/botanical/olive-sprig-horizontal.webp" alt="" aria-hidden="true">
+        </aside>
+      </div>
+    </section>
+
+    <section class="guestbook-section section-shell section-pad">
+      <img class="floral guestbook-floral" src="assets/botanical/olive-sprig-horizontal.webp" alt="" aria-hidden="true">
+      <div class="guestbook-heading">
+        <div>
+          <p class="section-kicker" data-i18n="guestbookKicker">LỜI CHÚC TỪ TRÁI TIM</p>
+          <h2 data-i18n="guestbookTitle">Sổ lưu bút</h2>
+          <p data-i18n="guestbookSubtitle">Những lời chúc chân thành của bạn sẽ là món quà vô giá dành cho chúng tôi.</p>
+        </div>
+        <span class="status-pill" data-i18n-html="guestbookStatus"><i></i> Mẫu giao diện thời gian thực</span>
+      </div>
+      <form id="wish-form" class="wish-form">
+        <label><span data-i18n-html="wishLabelName">Họ và tên <span>*</span></span><input name="wishName" required placeholder="Nhập họ tên của bạn" data-i18n-ph="wishPhName"></label>
+        <label class="wish-message"><span data-i18n-html="wishLabelMessage">Lời chúc <span>*</span></span><textarea name="wishMessage" required maxlength="500" rows="3" placeholder="Gửi lời chúc của bạn..." data-i18n-ph="wishPhMessage"></textarea></label>
+        <div class="wish-actions">
+          <small class="char-count"><span id="char-count">0</span>/500</small>
+          <button class="accent-button" type="submit" data-i18n-html="wishBtnSubmit">Gửi lời chúc <span>→</span></button>
+        </div>
+      </form>
+      <div class="approved-heading">
+        <h3 data-i18n="approvedTitle">Những lời chúc đã được duyệt</h3>
+        <span data-i18n="approvedSub">◉ Tự động cập nhật khi kết nối dữ liệu</span>
+      </div>
+      <div class="wishes-grid" id="wishes-grid">
+        <article class="wish-card"><div class="wish-meta"><span class="avatar avatar-one">M</span><div><strong>Nguyễn Minh Anh</strong><small>15.11.2025 · 09:24</small></div></div><p data-i18n-html="wishCard1">Chúc hai bạn trăm năm hạnh phúc, luôn vui vẻ và thành công trong cuộc sống! <span class="wish-heart">♥</span></p></article>
+        <article class="wish-card"><div class="wish-meta"><span class="avatar avatar-two">L</span><div><strong>Lê Thu Vân</strong><small>15.11.2025 · 09:48</small></div></div><p data-i18n-html="wishCard2">Chúc anh chị luôn yêu thương và đồng hành cùng nhau nhé! <span class="wish-heart">♥</span></p></article>
+        <article class="wish-card"><div class="wish-meta"><span class="avatar avatar-three">P</span><div><strong>Phạm Văn Dũng</strong><small>15.11.2025 · 11:27</small></div></div><p data-i18n-html="wishCard3">Chúc hai bạn có một khởi đầu thật đẹp và một cuộc sống viên mãn!</p></article>
+        <article class="wish-card"><div class="wish-meta"><span class="avatar avatar-four">T</span><div><strong>Trần Khánh Linh</strong><small>15.11.2025 · 15:33</small></div></div><p data-i18n-html="wishCard4">Chúc mừng trăm năm hạnh phúc! Chúc hai bạn luôn bên nhau, an yên và bền lâu! <span class="wish-heart">♥</span></p></article>
+      </div>
+      <p class="realtime-note" data-i18n-html="realtimeNote"><span>◉</span> Dữ liệu sẽ được cập nhật trực tiếp sau khi kết nối hệ thống. Đây là các lời chúc minh họa.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-floral"><img class="floral-footer-center" src="assets/botanical/olive-sprig-horizontal.webp" alt="" aria-hidden="true"></div>
+    <a class="brand" href="index.html"><span data-config="groomInitial">T</span><span class="brand-heart">♥</span><span data-config="brideInitial">M</span></a>
+    <p><span data-i18n="footerIntro">Trân trọng · </span><span data-config="groomName">Tên chú rể</span> &amp; <span data-config="brideName">Tên cô dâu</span></p>
+    <small data-i18n="footerSub">Giao diện tĩnh để duyệt thiết kế · Chưa kết nối cơ sở dữ liệu</small>
+    <div><a class="outline-button" href="index.html">← Quay về trang chủ</a></div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="site-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
