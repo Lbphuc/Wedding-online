@@ -65,8 +65,8 @@ body.admin-body {
   top: 0;
   z-index: 50;
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--admin-line);
   box-shadow: var(--admin-shadow-sm);
 }
@@ -972,6 +972,7 @@ body.admin-body {
   inset: 0;
   z-index: 100;
   background: rgba(43, 61, 53, 0.45);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -1115,7 +1116,7 @@ body.admin-body {
 /* --------------------------------------------------------------------------
    9. RESPONSIVE MEDIA QUERIES
    -------------------------------------------------------------------------- */
-@media (max-width: 820px) {
+@media (max-width: 850px) {
   .admin-header-container {
     flex-wrap: wrap;
     padding: 12px 16px;
@@ -1151,7 +1152,7 @@ body.admin-body {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 550px) {
   .metrics-grid {
     grid-template-columns: 1fr;
   }

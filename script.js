@@ -26,8 +26,7 @@
   // Cấu hình song ngữ Anh / Việt
   const i18n = {
     vi: {
-      docTitle: "Thiệp cưới | Trang chủ",
-      // topNote: "BẢN THỬ NGHIỆM · RSVP ĐÃ KẾT NỐI, SỔ LƯU BÚT ĐANG KIỂM THỬ",
+      docTitle: "Thiệp cưới Nhật & My | Lưu Long Nhật & Nguyễn Thảo My",
       navHome: "Trang chủ",
       navCountdown: "Đếm ngược",
       navSchedule: "Lịch trình",
@@ -35,14 +34,15 @@
       navGallery: "Album ảnh",
       navRsvp: "Xác nhận tham dự <span>↓</span>",
       navGuestbook: "Sổ lưu bút",
+      heroRsvp: "Xác nhận tham dự <span aria-hidden=\"true\">↓</span>",
       heroEyebrow: "LỄ THÀNH HÔN",
       heroIntro: "Chúng tôi rất hân hạnh được đón tiếp<br class=\"desktop-break\"> và chia sẻ niềm vui trong ngày trọng đại của mình!",
-      heroScroll: "Cuộn xuống <span>↓</span>",
-      heroPhotoTitle: "VÙNG ẢNH NỀN HERO",
-      heroPhotoSub: "Thêm ảnh ngang tại assets/images/wedding-hero.jpg",
-      heroPhotoCaption: "Một hành trình, hai trái tim",
       heroGroomFamilyLabel: "NHÀ TRAI",
       heroBrideFamilyLabel: "NHÀ GÁI",
+      groomDadLabel: "Bố:",
+      groomMomLabel: "Mẹ:",
+      brideDadLabel: "Bố:",
+      brideMomLabel: "Mẹ:",
       countdownKicker: "CÙNG ĐẾM NGƯỢC ĐẾN NGÀY VUI",
       countdownTitle: "Thời gian còn lại",
       unitDays: "Ngày",
@@ -53,11 +53,8 @@
       storyKicker: "CHUYỆN TÌNH YÊU",
       storyTitle: "<span class=\"title-part\">Câu chuyện</span> <span class=\"title-part\">của chúng tôi</span>",
       storyText1: "Từ những người xa lạ, chúng tôi đã gặp nhau, trở thành bạn, rồi yêu nhau và cùng nhau viết tiếp câu chuyện thanh xuân. Bây giờ, chúng tôi muốn bắt đầu một chương mới — chương của gia đình.",
-      storyText2: "Bạn có thể thay đoạn này bằng câu chuyện thật của hai người.",
+
       storyCta: "Xem album ảnh <span>→</span>",
-      storyPhotoBig: "ẢNH KỶ NIỆM",
-      storyPhotoSmall: "ẢNH NHỎ",
-      storyPhotoSub: "Thay ảnh sau",
       storyGalleryHint: "Nhấn vào hình để mở album ảnh <span aria-hidden=\"true\">↗</span>",
       scheduleKicker: "THỜI GIAN & ĐỊA ĐIỂM",
       scheduleTitle: "Lịch trình & địa điểm",
@@ -68,26 +65,18 @@
       mapPlaceholderSub: "Chọn một địa điểm phía trên để xem bản đồ và hướng dẫn đường đi.",
       mapSelectedKicker: "ĐỊA ĐIỂM ĐANG CHỌN",
       mapDirectionsText: "Bản đồ và đường dẫn sẽ thay đổi theo địa điểm bạn chọn phía trên.",
-      mapNotConfigured: "Hãy bổ sung địa chỉ trong site-config.js để hiển thị bản đồ và tạo đường dẫn chỉ đường.",
+      mapNotConfigured: "Hãy điền Xóm, Xã, Tỉnh hoặc địa chỉ trong site-config.js để hiển thị bản đồ và đường dẫn chỉ đường.",
+      locationHamletLabel: "Xóm",
+      locationCommuneLabel: "Xã",
+      locationProvinceLabel: "Tỉnh",
       mapBtn: "Mở Google Maps <span>↗</span>",
       galleryKicker: "KHOẢNH KHẮC KỶ NIỆM",
       galleryTitle: "Album ảnh cưới",
       gallerySub: "Những khoảnh khắc chúng mình muốn lưu giữ.",
-      galleryPhoto1: "ẢNH 01",
-      galleryPhoto2: "ẢNH 02",
-      galleryPhoto3: "ẢNH 03",
-      galleryPhoto4: "ẢNH 04",
-      galleryPhoto5: "ẢNH 05",
-      galleryPhoto6: "ẢNH 06",
-      galleryPhoto7: "ẢNH 07",
-      galleryPhoto8: "ẢNH 08",
-      galleryPhoto9: "ẢNH 09",
-      galleryPhoto10: "ẢNH 10",
-      galleryPhotoSub: "Thêm ảnh sau",
       galleryFooterNote: "Tất cả khoảnh khắc được sắp xếp trong cùng một album.",
       rsvpKicker: "PHẢN HỒI THAM DỰ",
-      rsvpTitle: "Xác nhận tham dự",
-      rsvpSubtitle: "Vui lòng điền thông tin bên dưới để chúng tôi chuẩn bị chu đáo nhất.",
+      rsvpTitle: "Quý khách sẽ đến chứ ?",
+      rsvpSubtitle: "Sự hiện diện của Quý khách sẽ làm ngày vui của chúng tôi thêm trọn vẹn. Xin vui lòng xác nhận tham dự bên dưới.",
       rsvpLabelName: "Họ và tên <span>*</span>",
       rsvpPhName: "Nhập họ và tên của bạn",
       rsvpLabelPhone: "Số điện thoại <small>(không bắt buộc)</small>",
@@ -99,29 +88,22 @@
       rsvpLabelNote: "Ghi chú <small>(tùy chọn)</small>",
       rsvpPhNote: "Lời nhắn, yêu cầu đặc biệt...",
       rsvpBtnSubmit: "Gửi xác nhận <span>→</span>",
-      rsvpDisclaimer: "Thông tin của bạn sẽ được gửi để chúng tôi chuẩn bị cho ngày cưới.",
       thankyouTitle: "Cảm ơn bạn",
       thankyouText: "đã dành thời gian<br>để gửi lời chúc và xác nhận tham dự!",
       guestbookKicker: "LỜI CHÚC TỪ TRÁI TIM",
       guestbookTitle: "Sổ lưu bút",
       guestbookSubtitle: "Những lời chúc chân thành của bạn sẽ là món quà vô giá dành cho chúng tôi.",
-      guestbookStatus: "<i></i> Đang kết nối sổ lưu bút",
+      guestbookStatus: "<i></i> Đang tải lời chúc đã duyệt…",
       wishLabelName: "Họ và tên <span>*</span>",
       wishPhName: "Nhập họ tên của bạn",
       wishLabelMessage: "Lời chúc <span>*</span>",
       wishPhMessage: "Gửi lời chúc của bạn...",
       wishBtnSubmit: "Gửi lời chúc <span>→</span>",
-      approvedTitle: "Những lời chúc yêu thương",
+      approvedTitle: "Lời chúc phúc yêu thương được gửi tới Dâu Rể",
       approvedSub: "◉ Tự động cập nhật lời chúc đã duyệt",
-      wishCard1: "Chúc hai bạn trăm năm hạnh phúc, luôn vui vẻ và thành công trong cuộc sống! <span class=\"wish-heart\">♥</span>",
-      wishCard2: "Chúc anh chị luôn yêu thương và đồng hành cùng nhau nhé! <span class=\"wish-heart\">♥</span>",
-      wishCard3: "Chúc hai bạn có một khởi đầu thật đẹp và một cuộc sống viên mãn!",
-      wishCard4: "Chúc mừng trăm năm hạnh phúc! Chúc hai bạn luôn bên nhau, an yên và bền lâu! <span class=\"wish-heart\">♥</span>",
-      realtimeNote: "<span>◉</span> Lời chúc sẽ hiển thị sau khi được duyệt và tự động cập nhật khi có lời chúc mới.",
       footerIntro: "Trân trọng · ",
-      footerSub: "RSVP đã kết nối · Lời chúc sẽ hiển thị sau khi được duyệt",
       toastMap: "Vui lòng bổ sung địa chỉ hoặc link Google Maps cho địa điểm đã chọn.",
-      toastMusic: "Nút nhạc đang là thành phần giao diện minh họa; chưa có bản nhạc được gắn vào.",
+      toastMusic: "Không phát được nhạc. Vui lòng thử lại sau.",
       toastRsvp: "Đã lưu xác nhận tham dự thành công. Cảm ơn bạn!",
       toastRsvpNotConnected: "Chưa kết nối được cơ sở dữ liệu. Vui lòng kiểm tra cấu hình Supabase.",
       toastRsvpFailed: "Chưa lưu được xác nhận. Vui lòng thử lại sau.",
@@ -131,8 +113,7 @@
       toastWishInvalid: "Họ tên cần từ 2–120 ký tự và lời chúc không quá 500 ký tự."
     },
     en: {
-      docTitle: "Wedding Invitation | Home",
-      topNote: "TEST BUILD · RSVP CONNECTED, GUESTBOOK UNDER TEST",
+      docTitle: "Wedding Invitation | Nhat & My",
       navHome: "Home",
       navCountdown: "Countdown",
       navSchedule: "Schedule",
@@ -140,14 +121,15 @@
       navGallery: "Gallery",
       navRsvp: "RSVP Now <span>↓</span>",
       navGuestbook: "Guestbook",
-      heroEyebrow: "WEDDING INVITATION",
+      heroRsvp: "Confirm attendance <span aria-hidden=\"true\">↓</span>",
+      heroEyebrow: "WEDDING CEREMONY",
       heroIntro: "We joyfully invite you to join us<br class=\"desktop-break\"> and share the happiness of our special day!",
-      heroScroll: "Scroll down <span>↓</span>",
-      heroPhotoTitle: "HERO BACKGROUND PHOTO",
-      heroPhotoSub: "Add a landscape photo at assets/images/wedding-hero.jpg",
-      heroPhotoCaption: "One journey, two hearts",
       heroBrideFamilyLabel: "BRIDE'S FAMILY",
       heroGroomFamilyLabel: "GROOM'S FAMILY",
+      groomDadLabel: "Dad:",
+      groomMomLabel: "Mom:",
+      brideDadLabel: "Dad:",
+      brideMomLabel: "Mom:",
       countdownKicker: "COUNTING DOWN TO OUR SPECIAL DAY",
       countdownTitle: "Time Remaining",
       unitDays: "Days",
@@ -158,11 +140,8 @@
       storyKicker: "OUR STORY",
       storyTitle: "<span class=\"title-part\">Our Love</span> <span class=\"title-part\">Story</span>",
       storyText1: "From two strangers who met by chance, we became close friends, fell in love, and shared a beautiful youth together. Today, we are ready to turn the page and begin a brand new chapter — building a loving family.",
-      storyText2: "You can replace this section with the couple's real love story.",
+
       storyCta: "View Photo Gallery <span>→</span>",
-      storyPhotoBig: "MEMORIES PHOTO",
-      storyPhotoSmall: "MOMENT PHOTO",
-      storyPhotoSub: "Replace photo later",
       storyGalleryHint: "Select the photos to open the gallery <span aria-hidden=\"true\">↗</span>",
       scheduleKicker: "SAVE THE DATE",
       scheduleTitle: "Schedule & Locations",
@@ -173,26 +152,18 @@
       mapPlaceholderSub: "Choose a location above to view its map and directions.",
       mapSelectedKicker: "SELECTED LOCATION",
       mapDirectionsText: "The map and directions link update when you choose a location above.",
-      mapNotConfigured: "Add the venue address in site-config.js to display the map and directions link.",
+      mapNotConfigured: "Fill in Hamlet, Commune, Province, or the full address in site-config.js to display the map and directions link.",
+      locationHamletLabel: "Hamlet",
+      locationCommuneLabel: "Commune",
+      locationProvinceLabel: "Province",
       mapBtn: "Open Google Maps <span>↗</span>",
       galleryKicker: "OUR MEMORIES",
       galleryTitle: "Wedding Photo Gallery",
       gallerySub: "Precious moments we cherish forever.",
-      galleryPhoto1: "PHOTO 01",
-      galleryPhoto2: "PHOTO 02",
-      galleryPhoto3: "PHOTO 03",
-      galleryPhoto4: "PHOTO 04",
-      galleryPhoto5: "PHOTO 05",
-      galleryPhoto6: "PHOTO 06",
-      galleryPhoto7: "PHOTO 07",
-      galleryPhoto8: "PHOTO 08",
-      galleryPhoto9: "PHOTO 09",
-      galleryPhoto10: "PHOTO 10",
-      galleryPhotoSub: "Add photo later",
       galleryFooterNote: "All memories are arranged inside one album.",
       rsvpKicker: "KINDLY REPLY",
-      rsvpTitle: "RSVP Confirmation",
-      rsvpSubtitle: "Please let us know your attendance so we can welcome you warmly.",
+      rsvpTitle: "Will you be coming ?",
+      rsvpSubtitle: "Your presence will make our wedding day even more special. Please confirm your attendance below.",
       rsvpLabelName: "Full Name <span>*</span>",
       rsvpPhName: "Enter your full name",
       rsvpLabelPhone: "Phone Number <small>(optional)</small>",
@@ -204,29 +175,22 @@
       rsvpLabelNote: "Special Notes <small>(optional)</small>",
       rsvpPhNote: "Wishes, dietary restrictions, questions...",
       rsvpBtnSubmit: "Send Confirmation <span>→</span>",
-      rsvpDisclaimer: "Your response will be sent to help us prepare for the wedding day.",
       thankyouTitle: "Thank You",
       thankyouText: "for taking the time<br>to send your warm wishes and RSVP!",
       guestbookKicker: "WORDS FROM THE HEART",
       guestbookTitle: "Wedding Guestbook",
       guestbookSubtitle: "Your heartfelt wishes and blessings are the most precious gift to us.",
-      guestbookStatus: "<i></i> Connecting guestbook",
+      guestbookStatus: "<i></i> Loading approved wishes…",
       wishLabelName: "Full Name <span>*</span>",
       wishPhName: "Enter your name",
       wishLabelMessage: "Blessing Message <span>*</span>",
       wishPhMessage: "Write your heartfelt wedding wishes...",
       wishBtnSubmit: "Send Wishes <span>→</span>",
-      approvedTitle: "Approved Wedding Wishes",
+      approvedTitle: "Loving wishes sent to the bride and groom",
       approvedSub: "◉ Approved wishes update automatically",
-      wishCard1: "Wishing you both a lifetime of happiness, joyful laughter, and everlasting love! <span class=\"wish-heart\">♥</span>",
-      wishCard2: "May your journey ahead be filled with wonderful adventures and companionship! <span class=\"wish-heart\">♥</span>",
-      wishCard3: "Congratulations! Wishing you a splendid wedding and an inspiring life together!",
-      wishCard4: "Warmest congratulations on your wedding! May your marriage be blessed with lasting joy! <span class=\"wish-heart\">♥</span>",
-      realtimeNote: "<span>◉</span> Wishes appear after approval and update automatically when new approved messages arrive.",
       footerIntro: "With Love · ",
-      footerSub: "RSVP connected · Wishes appear after approval",
       toastMap: "Please add the selected location address or Google Maps link in site-config.js.",
-      toastMusic: "The music button is an interactive demo; audio track not attached yet.",
+      toastMusic: "Music could not be played. Please try again.",
       toastRsvp: "Your RSVP has been saved successfully. Thank you!",
       toastRsvpNotConnected: "The database connection is not ready. Please check the Supabase configuration.",
       toastRsvpFailed: "We could not save your RSVP. Please try again later.",
@@ -298,6 +262,20 @@
       }
     });
 
+    // Localized fields from site-config.js (English uses a separate *En key).
+    document.querySelectorAll('[data-config][data-config-en]').forEach((el) => {
+      const key = lang === 'en'
+        ? el.getAttribute('data-config-en')
+        : el.getAttribute('data-config');
+      if (config[key] !== undefined && config[key] !== null) {
+        el.textContent = config[key];
+      }
+    });
+
+    const emptyWishState = document.getElementById('wish-empty-state');
+    if (emptyWishState) emptyWishState.textContent = lang === 'en'
+      ? 'Approved wishes will appear here once the guestbook is connected.'
+      : 'Lời chúc đã được duyệt sẽ hiển thị tại đây khi kết nối sổ lưu bút.';
     if (typeof refreshLocationUI === 'function') refreshLocationUI();
   }
 
@@ -350,17 +328,36 @@
     ).trim();
     hero.style.setProperty('--hero-bg-position', desktopPosition);
     hero.style.setProperty('--hero-bg-position-mobile', mobilePosition);
+    hero.style.setProperty('--hero-photo-position', desktopPosition);
+    hero.style.setProperty('--hero-photo-position-mobile', mobilePosition);
 
+    // The image now lives in its own semantic block. Keep both picture sources configurable
+    // from site-config.js instead of relying on CSS background images.
+    const heroPicture = hero.querySelector('.hero-media-picture');
+    const heroMediaElement = hero.querySelector('.hero-media-image');
+    const heroMobileSource = heroPicture ? heroPicture.querySelector('source[media]') : null;
     const heroImagePath = String(config.heroImage || '').trim();
+    const heroMobileImagePath = String(config.heroMobileImage || '').trim();
+    if (heroMobileImagePath) {
+      const mobileImage = new Image();
+      mobileImage.onload = () => {
+        const resolved = mobileImage.src;
+        hero.style.setProperty('--hero-mobile-image', `url(${JSON.stringify(resolved)})`);
+        if (heroMobileSource) heroMobileSource.srcset = resolved;
+      };
+      mobileImage.onerror = () => console.warn('[Hero] Không tải được ảnh mobile:', heroMobileImagePath);
+      try { mobileImage.src = new URL(heroMobileImagePath, document.baseURI).href; } catch (error) { console.warn('[Hero] Đường dẫn ảnh mobile không hợp lệ:', error); }
+    }
     if (heroImagePath) {
       const heroImage = new Image();
       heroImage.onload = () => {
-        // JSON.stringify safely wraps the resolved URL as a CSS url() string.
-        hero.style.setProperty('--hero-image', `url(${JSON.stringify(heroImage.src)})`);
+        const resolved = heroImage.src;
+        hero.style.setProperty('--hero-image', `url(${JSON.stringify(resolved)})`);
+        if (heroMediaElement) heroMediaElement.src = resolved;
         hero.classList.add('has-hero-image');
       };
       heroImage.onerror = () => {
-        console.warn(`[Hero] Không tải được ảnh nền "${heroImagePath}". Kiểm tra lại heroImage trong site-config.js.`);
+        console.warn(`[Hero] Không tải được ảnh cưới desktop "${heroImagePath}". Kiểm tra lại heroImage trong site-config.js.`);
       };
       try {
         heroImage.src = new URL(heroImagePath, document.baseURI).href;
@@ -393,11 +390,17 @@
   updateCountdown();
   window.setInterval(updateCountdown, 1000);
 
-  // Toast thông báo minh họa
+  // Toast: create DOM nodes and insert all messages as text, never as HTML.
   const toast = document.getElementById('toast');
   function showToast(message) {
     if (!toast) return;
-    toast.innerHTML = `<span class="toast-icon">🌿</span><span>${message}</span>`;
+    const icon = document.createElement('span');
+    icon.className = 'toast-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = '🌿';
+    const text = document.createElement('span');
+    text.textContent = String(message ?? '');
+    toast.replaceChildren(icon, text);
     toast.classList.add('show');
     window.clearTimeout(showToast.timer);
     showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 4200);
@@ -416,11 +419,11 @@
   const mapLocationVenue = document.getElementById('map-location-venue');
   const mapLocationAddress = document.getElementById('map-location-address');
   const mapDirectionsText = document.getElementById('map-directions-text');
-  let activeLocationKey = 'groomReception';
+  let activeLocationKey = null;
 
   function isPlaceholderValue(value) {
     const text = String(value || '').trim();
-    return !text || /^\[.*\]$/.test(text) || /địa chỉ chi tiết|địa điểm tổ chức|thêm địa chỉ/i.test(text);
+    return !text || /^\[.*\]$/.test(text) || /\[[^\]]+\]/.test(text) || /địa chỉ chi tiết|địa điểm tổ chức|thêm địa chỉ/i.test(text);
   }
 
   function safeHttpsUrl(value) {
@@ -471,19 +474,50 @@
       }
     }[key] || {};
 
+    const structuredAddress = ['hamlet', 'commune', 'province'].some((field) =>
+      Object.prototype.hasOwnProperty.call(current, field)
+    );
+
     return {
       time: current.time || legacy.time || '',
       venue: current.venue || legacy.venue || '',
+      hamlet: current.hamlet || '',
+      commune: current.commune || '',
+      province: current.province || '',
+      structuredAddress,
       address: current.address || legacy.address || '',
       mapUrl: current.mapUrl || legacy.mapUrl || '',
       mapEmbedUrl: current.mapEmbedUrl || legacy.mapEmbedUrl || ''
     };
   }
 
+  function isLocationConfigured(location) {
+    return [location.time, location.venue, location.hamlet, location.commune, location.province, location.address]
+      .some((value) => Boolean(value && !isPlaceholderValue(value)));
+  }
+
+  // The bride-family block stays visible as an editable slot even before names/address are finalized.
+  // Other family blocks continue to hide empty detail rows to avoid exposing placeholders to guests.
+  document.querySelectorAll('.hero-family-parents').forEach((row) => {
+    const value = row.querySelector('[data-config]');
+    const family = row.closest('.hero-family-item');
+    const isBrideFamily = Boolean(family && family.classList.contains('hero-family-bride'));
+    row.hidden = isBrideFamily ? false : (!value || isPlaceholderValue(value.textContent));
+  });
+  document.querySelectorAll('.hero-family-address').forEach((row) => {
+    row.hidden = isPlaceholderValue(row.textContent);
+  });
+  document.querySelectorAll('.hero-family-item').forEach((family) => {
+    const isBrideFamily = family.classList.contains('hero-family-bride');
+    const hasVisibleDetails = [...family.querySelectorAll('.hero-family-parents, .hero-family-address')]
+      .some((row) => !row.hidden);
+    family.hidden = isBrideFamily ? false : !hasVisibleDetails;
+  });
+
   function configureMapFrame(location) {
     if (!mapDisplay || !mapIframe || !mapPlaceholderState) return;
 
-    const mapSearchText = [location.venue, location.address].filter((value) => !isPlaceholderValue(value)).join(', ');
+    const mapSearchText = [location.venue, location.hamlet, location.commune, location.province, location.address].filter((value) => !isPlaceholderValue(value)).join(', ');
     const explicitEmbed = safeHttpsUrl(location.mapEmbedUrl);
     let embedUrl = '';
     if (explicitEmbed) {
@@ -533,40 +567,117 @@
       brideReception: 'brideReceptionTitle',
       ceremony: 'weddingCeremony'
     };
-    const location = getLocationConfig(key);
-    const dict = i18n[currentLang] || i18n.vi;
-    activeLocationKey = key;
+    const allLocationKeys = locationCards.map((card) => card.dataset.locationOption);
+    const configuredKeys = allLocationKeys.filter((locationKey) => isLocationConfigured(getLocationConfig(locationKey)));
+    if (!allLocationKeys.includes(key)) key = configuredKeys[0] || allLocationKeys[0] || null;
 
     locationCards.forEach((card) => {
       const cardKey = card.dataset.locationOption;
-      const selected = cardKey === key;
       const cardLocation = getLocationConfig(cardKey);
+      // Keep every location card present as a logical/content slot; blank details are hidden individually.
+      card.hidden = false;
+      const selected = cardKey === key;
       card.classList.toggle('is-selected', selected);
       card.setAttribute('aria-pressed', String(selected));
 
       const timeNode = card.querySelector('[data-location-field="time"]');
       const venueNode = card.querySelector('[data-location-field="venue"]');
       const addressNode = card.querySelector('[data-location-field="address"]');
-      const fallbackVenue = cardKey === 'groomReception' ? '[Địa điểm nhà trai]' : cardKey === 'brideReception' ? '[Địa điểm nhà gái]' : '[Địa điểm lễ thành hôn]';
-      if (timeNode) timeNode.textContent = cardLocation.time && !isPlaceholderValue(cardLocation.time) ? cardLocation.time : (currentLang === 'en' ? 'Time to be confirmed' : '[Giờ] · [Ngày cưới]');
-      if (venueNode) venueNode.textContent = cardLocation.venue && !isPlaceholderValue(cardLocation.venue) ? cardLocation.venue : (currentLang === 'en' ? 'Venue to be updated' : fallbackVenue);
-      if (addressNode) addressNode.textContent = cardLocation.address && !isPlaceholderValue(cardLocation.address) ? cardLocation.address : (currentLang === 'en' ? 'Address to be updated' : '[Địa chỉ chi tiết]');
+      const addressPartsNode = card.querySelector('[data-location-address-parts]');
+      if (timeNode) {
+        timeNode.textContent = cardLocation.time && !isPlaceholderValue(cardLocation.time) ? cardLocation.time : '';
+        timeNode.hidden = !timeNode.textContent;
+      }
+
+      const venue = cardLocation.venue && !isPlaceholderValue(cardLocation.venue) ? cardLocation.venue : '';
+      if (venueNode) {
+        venueNode.textContent = venue;
+        venueNode.hidden = !venue;
+      }
+
+      if (cardLocation.structuredAddress) {
+        if (addressPartsNode) addressPartsNode.hidden = false;
+        if (addressNode) addressNode.hidden = true;
+        ['hamlet', 'commune', 'province'].forEach((field) => {
+          const valueNode = card.querySelector(`[data-location-field="${field}"]`);
+          const part = valueNode ? valueNode.closest('.event-address-part') : null;
+          const value = cardLocation[field] && !isPlaceholderValue(cardLocation[field]) ? cardLocation[field] : '';
+          if (valueNode) valueNode.textContent = value;
+          if (part) part.hidden = !value;
+        });
+        if (addressPartsNode) {
+          addressPartsNode.hidden = ![cardLocation.hamlet, cardLocation.commune, cardLocation.province]
+            .some((value) => value && !isPlaceholderValue(value));
+        }
+      } else {
+        if (addressPartsNode) addressPartsNode.hidden = true;
+        if (addressNode) {
+          const address = cardLocation.address && !isPlaceholderValue(cardLocation.address) ? cardLocation.address : '';
+          addressNode.textContent = address;
+          addressNode.hidden = !address;
+        }
+      }
     });
 
-    if (mapLocationTitle) mapLocationTitle.textContent = dict[options[key]] || dict.mapDirectionsTitle;
-    if (mapLocationTime) mapLocationTime.textContent = location.time && !isPlaceholderValue(location.time) ? location.time : '';
+    if (!allLocationKeys.length || !key) {
+      activeLocationKey = null;
+      if (mapDisplay) mapDisplay.hidden = true;
+      const mapRow = document.querySelector('.map-row');
+      if (mapRow) mapRow.hidden = true;
+      return;
+    }
+
+    activeLocationKey = key;
+    const location = getLocationConfig(key);
+    const dict = i18n[currentLang] || i18n.vi;
+    const selectedTitle = dict[options[key]] || dict.scheduleTitle;
+
+    const selectedCard = locationCards.find((card) => card.dataset.locationOption === key);
+    if (selectedCard) {
+      selectedCard.classList.add('is-selected');
+      selectedCard.setAttribute('aria-pressed', 'true');
+    }
+    if (mapDisplay) mapDisplay.hidden = false;
+    const mapRow = document.querySelector('.map-row');
+    if (mapRow) mapRow.hidden = false;
+    if (mapLocationTitle) mapLocationTitle.textContent = selectedTitle;
+    if (mapLocationTime) {
+      mapLocationTime.textContent = location.time && !isPlaceholderValue(location.time) ? location.time : '';
+      mapLocationTime.hidden = !mapLocationTime.textContent;
+    }
     if (mapLocationVenue) {
       const venue = location.venue && !isPlaceholderValue(location.venue) ? location.venue : '';
       mapLocationVenue.textContent = venue;
       mapLocationVenue.hidden = !venue;
     }
-    if (mapLocationAddress) {
-      const address = location.address && !isPlaceholderValue(location.address) ? location.address : '';
-      mapLocationAddress.textContent = address;
-      mapLocationAddress.hidden = !address;
+
+    const mapLocationAddressParts = document.getElementById('map-location-address-parts');
+    if (location.structuredAddress) {
+      if (mapLocationAddress) mapLocationAddress.hidden = true;
+      if (mapLocationAddressParts) mapLocationAddressParts.hidden = false;
+      ['hamlet', 'commune', 'province'].forEach((field) => {
+        const valueNode = document.querySelector(`[data-location-detail="${field}"]`);
+        const part = valueNode ? valueNode.closest('.map-location-address-part') : null;
+        const value = location[field] && !isPlaceholderValue(location[field]) ? location[field] : '';
+        if (valueNode) valueNode.textContent = value;
+        if (part) part.hidden = !value;
+      });
+      if (mapLocationAddressParts) {
+        mapLocationAddressParts.hidden = ![location.hamlet, location.commune, location.province]
+          .some((value) => value && !isPlaceholderValue(value));
+      }
+    } else {
+      if (mapLocationAddressParts) mapLocationAddressParts.hidden = true;
+      if (mapLocationAddress) {
+        const address = location.address && !isPlaceholderValue(location.address) ? location.address : '';
+        mapLocationAddress.textContent = address;
+        mapLocationAddress.hidden = !address;
+      }
     }
+
     if (mapDirectionsText) {
-      const hasLocation = [location.venue, location.address].some((value) => value && !isPlaceholderValue(value));
+      const hasLocation = [location.venue, location.hamlet, location.commune, location.province, location.address]
+        .some((value) => value && !isPlaceholderValue(value));
       mapDirectionsText.textContent = hasLocation
         ? dict.mapDirectionsText
         : (dict.mapNotConfigured || dict.mapDirectionsText);
@@ -590,13 +701,50 @@
   }
   renderSelectedLocation(activeLocationKey);
 
-  // Xử lý nút nhạc minh họa
-  document.querySelectorAll('.music-toggle').forEach((button) => {
-    button.addEventListener('click', () => {
+  // Trình phát nhạc nền cho thiệp cưới
+  const bgMusic = document.getElementById('background-music');
+
+  function syncMusicButtons(isPlaying) {
+    document.querySelectorAll('.music-toggle').forEach((button) => {
       const pill = button.querySelector('.toggle-pill');
-      if (pill) pill.classList.toggle('active');
-      const msg = i18n[currentLang]?.toastMusic || i18n.vi.toastMusic;
-      showToast(msg);
+
+      if (pill) {
+        pill.classList.toggle('active', isPlaying);
+      }
+
+      button.setAttribute('aria-pressed', String(isPlaying));
+      button.setAttribute(
+        'aria-label',
+        isPlaying ? 'Tắt nhạc / Stop music' : 'Bật nhạc / Play music'
+      );
+    });
+  }
+
+  document.querySelectorAll('.music-toggle').forEach((button) => {
+    button.setAttribute('aria-pressed', 'false');
+
+    button.addEventListener('click', async () => {
+      if (!bgMusic) {
+        showToast('Không tìm thấy trình phát nhạc.');
+        return;
+      }
+
+      try {
+        if (bgMusic.paused) {
+          bgMusic.volume = 0.35;
+          await bgMusic.play();
+          syncMusicButtons(true);
+        } else {
+          bgMusic.pause();
+          syncMusicButtons(false);
+        }
+      } catch (error) {
+        console.error('Không thể phát nhạc:', error);
+
+        showToast(i18n[currentLang]?.toastMusic || i18n.vi.toastMusic);
+
+        syncMusicButtons(false);
+      }
     });
   });
 
@@ -629,6 +777,11 @@
     rsvpForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!rsvpForm.reportValidity()) return;
+      if (String(rsvpForm.elements.namedItem('website')?.value || '').trim()) {
+        rsvpForm.reset();
+        updateGuestCountState();
+        return;
+      }
 
       if (!supabaseClient) {
         showToast(i18n[currentLang]?.toastRsvpNotConnected || i18n.vi.toastRsvpNotConnected);
@@ -675,6 +828,8 @@
         const { error } = await supabaseClient.from('rsvps').insert(payload);
         if (error) throw error;
 
+        const thankyouCard = document.getElementById('rsvp-thankyou');
+        if (thankyouCard) thankyouCard.hidden = false;
         showToast(i18n[currentLang]?.toastRsvp || i18n.vi.toastRsvp);
         rsvpForm.reset();
         updateGuestCountState();
@@ -697,7 +852,6 @@
   const wishCount = document.getElementById('char-count');
   const wishesGrid = document.getElementById('wishes-grid');
   const guestbookStatus = document.querySelector('.guestbook-heading .status-pill');
-  const realtimeNote = document.querySelector('.realtime-note');
   let latestApprovedWishes = [];
   let wishRealtimeChannel = null;
 
@@ -822,7 +976,7 @@
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
           setGuestbookStatus(
-            currentLang === 'en' ? 'Realtime connected' : 'Chúc bạn vui vẻ',
+            currentLang === 'en' ? 'Realtime connected' : 'Realtime đã kết nối',
             'live'
           );
         } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
@@ -845,6 +999,11 @@
     wishForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!wishForm.reportValidity()) return;
+      if (String(wishForm.elements.namedItem('website')?.value || '').trim()) {
+        wishForm.reset();
+        if (wishCount) wishCount.textContent = '0';
+        return;
+      }
 
       if (!supabaseClient) {
         showToast(i18n[currentLang]?.toastWishNotConnected || i18n.vi.toastWishNotConnected);
@@ -902,9 +1061,21 @@
     wishesGrid.replaceChildren(loading);
     setGuestbookStatus(currentLang === 'en' ? 'Connecting…' : 'Đang kết nối…');
     loadApprovedWishes().then(startWishRealtime);
+  } else if (wishesGrid) {
+    wishesGrid.replaceChildren();
+    setGuestbookStatus(currentLang === 'en' ? 'Guestbook unavailable' : 'Sổ lưu bút chưa kết nối', 'offline');
+    const empty = document.createElement('p');
+    empty.id = 'wish-empty-state';
+    empty.className = 'wish-empty';
+    empty.textContent = currentLang === 'en'
+      ? 'Approved wishes will appear here once the guestbook is connected.'
+      : 'Lời chúc đã được duyệt sẽ hiển thị tại đây khi kết nối sổ lưu bút.';
+    wishesGrid.appendChild(empty);
   }
 
-  // Keep both complete names on one line without clipping, including narrow Android screens.
+  // Fit both names into one row only on wider screens. On phones the same logical
+  // name block becomes a three-row CSS grid (groom / ampersand / bride), so fitting
+  // the combined width would incorrectly shrink both names and defeat the design.
   const coupleHeading = document.querySelector('.hero h1.couple-names');
   if (coupleHeading) {
     const fitCoupleNames = () => {
@@ -912,6 +1083,7 @@
       const ampersand = coupleHeading.querySelector('.ampersand');
       if (names.length !== 2 || !ampersand) return;
       names.forEach((name) => { name.style.fontSize = ''; });
+      if (window.matchMedia('(max-width: 550px)').matches) return;
       const styles = getComputedStyle(coupleHeading);
       const baseSize = parseFloat(getComputedStyle(names[0]).fontSize) || 16;
       const canvas = document.createElement('canvas');
@@ -921,12 +1093,17 @@
       const fontWeight = getComputedStyle(names[0]).fontWeight;
       const fontStyle = getComputedStyle(names[0]).fontStyle;
       context.font = `${fontStyle} ${fontWeight} ${baseSize}px ${fontFamily}`;
-      const naturalNamesWidth = names.reduce((sum, name) => sum + context.measureText(name.textContent.trim()).width, 0);
+      const wordSpacing = parseFloat(getComputedStyle(names[0]).wordSpacing) || 0;
+      const naturalNamesWidth = names.reduce((sum, name) => {
+        const text = name.textContent.trim();
+        const spaces = (text.match(/\s+/g) || []).length;
+        return sum + context.measureText(text).width + spaces * wordSpacing;
+      }, 0);
       const ampWidth = ampersand.getBoundingClientRect().width || baseSize * .7;
       const gap = parseFloat(styles.columnGap || styles.gap) || 0;
       const available = coupleHeading.clientWidth - ampWidth - gap * 2 - 8;
       if (naturalNamesWidth > available) {
-        const minSize = window.matchMedia('(max-width: 350px)').matches ? 13 : (window.matchMedia('(max-width: 720px)').matches ? 14 : 18);
+        const minSize = window.matchMedia('(max-width: 350px)').matches ? 13 : (window.matchMedia('(max-width: 550px)').matches ? 14 : 18);
         const fittedSize = Math.max(minSize, baseSize * available / naturalNamesWidth);
         names.forEach((name) => { name.style.fontSize = `${fittedSize}px`; });
       }

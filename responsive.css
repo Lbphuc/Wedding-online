@@ -1,616 +1,193 @@
 /* =====================================================================
-   RESPONSIVE SYSTEM v6
-   Central responsive behavior for the public invitation.
-   Breakpoints are based on content fit, not device brand/model.
+   WEDDING-ONLINE RESPONSIVE SYSTEM — consolidated 2026-10-20
+   One source of truth for layout breakpoints and fluid component sizing.
+   Inspired by the reference site's grid approach, adapted to this site's
+   own semantic HTML rather than importing a WordPress/Flatsome stylesheet.
+
+   Breakpoints:
+   - 1100px: compact desktop header
+   - 850px: tablet layout
+   - 650px: narrow tablet/content-fit adjustment
+   - 550px: mobile layout
+   - 350px: compact phones
    ===================================================================== */
 
 :root {
-  --page-gutter: clamp(.75rem, 3.5vw, 2.5rem);
+  --page-gutter: clamp(1rem, 3.5vw, 2.5rem);
   --section-space: clamp(2.5rem, 6vw, 5.75rem);
-  --type-display: clamp(2.5rem, 3.6vw, 3.6rem);
-  --type-heading: clamp(1.65rem, 1.35rem + 1vw, 2.35rem);
-  --type-subheading: clamp(1.15rem, 1rem + .4vw, 1.4rem);
-  --type-body: clamp(.94rem, .9rem + .15vw, 1rem);
-  --type-small: clamp(.8rem, .77rem + .12vw, .9rem);
-  --type-label: clamp(.68rem, .66rem + .12vw, .78rem);
-  --type-date: clamp(1.25rem, 1.08rem + .55vw, 1.7rem);
+  --type-display: clamp(2.45rem, 4.2vw, 3.35rem);
+  --type-heading: clamp(1.85rem, 1.5rem + 1.08vw, 2.65rem);
+  --type-subheading: clamp(1.12rem, 1.02rem + .35vw, 1.35rem);
+  --type-body: clamp(.96rem, .92rem + .15vw, 1.03rem);
+  --type-small: clamp(.86rem, .83rem + .12vw, .94rem);
+  --type-label: clamp(.72rem, .70rem + .12vw, .82rem);
+  --type-date: clamp(1.35rem, 1.15rem + .7vw, 1.8rem);
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { width: 100%; max-width: 100%; overflow-x: clip; scroll-padding-top: 6rem; }
-body { width: 100%; min-width: 0; margin: 0; overflow-x: clip; }
+/* Universal sizing, viewport safety and readable fluid containers. */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow-x: clip;
+}
+
 img, svg, video, iframe { max-width: 100%; }
-button, input, select, textarea { max-width: 100%; min-width: 0; }
+button, input, select, textarea { min-width: 0; max-width: 100%; }
 section[id] { scroll-margin-top: 6rem; }
 
-/* Shared page widths use a fluid gutter and a readable maximum. */
-.section-shell { width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), 1320px); margin-inline: auto; }
+.section-shell {
+  width: min(1320px, calc(100% - var(--page-gutter) - var(--page-gutter)));
+  margin-inline: auto;
+}
 .section-pad { padding-block: var(--section-space); }
-.hero.section-shell { width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), 1450px); }
+.hero.section-shell {
+  width: min(1450px, calc(100% - var(--page-gutter) - var(--page-gutter)));
+  min-height: clamp(36rem, 47vw, 44.5rem);
+}
 
-/* The couple names are the visual focal point and remain one unbroken row. */
+/* Great Vibes is reserved for couple names and brand initials. */
+.brand > span:not(.brand-heart) {
+  font-family: "Great Vibes", cursive;
+  font-size: 1em;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
 .hero h1.couple-names {
   display: flex;
   flex-flow: row nowrap;
   align-items: baseline;
   justify-content: center;
-  gap: clamp(.35rem, 1.15vw, .9rem);
+  gap: clamp(.28rem, 1.05vw, .75rem);
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  margin-inline: auto;
-  padding-inline: .1rem;
-  white-space: nowrap;
-  text-align: center;
+  margin: .4rem auto 0;
+  padding-inline: .15rem;
   overflow: visible;
+  text-align: center;
+  white-space: nowrap;
 }
+
 .hero h1.couple-names > .couple-name {
-  flex: 0 0 auto;
+  display: block;
+  flex: 0 1 auto;
+  width: auto;
   min-width: 0;
   max-width: none;
-  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-family: "Great Vibes", cursive;
   font-size: var(--type-display);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -.025em;
-  white-space: nowrap;
-  text-transform: none;
-  font-variant-caps: normal;
-}
-.hero h1.couple-names > .ampersand {
-  flex: 0 0 auto;
-  margin-inline: .08em;
-  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(.9rem, 1.1vw, 1.15rem);
   font-style: normal;
   font-weight: 400;
-  line-height: 1;
-}
-.hero .intro { max-width: 42rem; margin-inline: auto; text-wrap: pretty; }
-.hero .hero-date { font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1; text-wrap: balance; }
-
-/* Keep vector icons consistent across iOS, Android and desktop browsers. */
-.event-icon svg { display: block; width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-
-/* Fluid content grids; children are allowed to shrink rather than overflow. */
-.event-grid, .gallery-grid, .countdown-grid, .rsvp-layout, .guestbook-layout,
-.form-grid, .two-col, .form-inline-row, .map-row { min-width: 0; }
-.event-card, .form-card, .wish-form, .wish-card, .map-copy, .hero-family-item { min-width: 0; }
-.event-card p, .map-copy p, .hero-family-parents, .hero-family-address,
-.wish-card p, .guestbook-heading p { overflow-wrap: anywhere; }
-.map-placeholder iframe { width: 100%; height: 100%; min-height: inherit; border: 0; }
-input, select, textarea { width: 100%; }
-
-/* Medium desktop/tablet: reduce header pressure before it wraps. */
-@media (max-width: 1100px) and (min-width: 721px) {
-  :root { --type-display: clamp(2rem, 3.1vw, 2.8rem); }
-  .site-header { gap: .75rem; padding-inline: clamp(.8rem, 2vw, 1.5rem); }
-  .brand { font-size: clamp(1.8rem, 2.5vw, 2.25rem); }
-  .main-nav { gap: clamp(.45rem, .9vw, .8rem); }
-  .main-nav a { font-size: var(--type-label); }
-  .main-nav .nav-cta { padding-inline: .6rem; }
-  .hero.section-shell { min-height: clamp(34rem, 53vw, 42rem); padding: clamp(2rem, 4vw, 3.5rem); }
-  .hero-family-grid { gap: .6rem; }
-  .hero-family-parents, .hero-family-address { font-size: var(--type-small); }
-  .event-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.65rem, 1.5vw, 1.25rem); }
-  .map-row { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(1rem, 2vw, 2rem); }
-}
-
-/* Mobile: compact sticky header, swipeable single-row navigation, stacked sections. */
-@media (max-width: 720px) {
-  :root {
-    --page-gutter: .55rem;
-    --section-space: clamp(2rem, 7vw, 3rem);
-    --type-display: clamp(1.15rem, 5.1vw, 1.45rem);
-    --type-heading: clamp(1.45rem, 5.2vw, 1.8rem);
-    --type-subheading: 1.08rem;
-    --type-body: .96rem;
-    --type-small: .84rem;
-    --type-label: .7rem;
-    --type-date: clamp(1.15rem, 4.8vw, 1.4rem);
-  }
-  html { scroll-padding-top: 5.2rem; }
-  section[id] { scroll-margin-top: 5.2rem; }
-
-  .site-header {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
-    align-items: center;
-    gap: .3rem .5rem;
-    min-height: 0;
-    padding: .45rem clamp(.55rem, 2.5vw, .85rem) .25rem;
-  }
-  .brand { grid-column: 1; grid-row: 1; min-width: 0; font-size: clamp(1.7rem, 6.5vw, 2.15rem); }
-  .header-actions { grid-column: 2; grid-row: 1; display: flex; align-items: center; gap: .35rem; margin-left: auto; }
-  .lang-toggle { padding: .22rem .42rem; font-size: .68rem; }
-  .music-toggle { font-size: 1rem; }
-  .main-nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: clamp(.8rem, 3.5vw, 1.15rem);
-    width: 100%;
-    min-width: 0;
-    padding: .1rem .15rem .28rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    mask-image: linear-gradient(to right, #000 94%, transparent 100%);
-    font-size: .7rem;
-  }
-  .main-nav::-webkit-scrollbar { display: none; }
-  .main-nav a { flex: 0 0 auto; padding: .25rem 0; font-size: .7rem; white-space: nowrap; }
-  .main-nav .nav-cta { padding: .22rem .5rem; }
-
-  .section-shell, .hero.section-shell { width: calc(100% - 1rem); }
-  .section-pad { padding-block: clamp(2rem, 7vw, 2.8rem); }
-  .hero.section-shell {
-    display: block;
-    min-height: 0;
-    padding: clamp(2.3rem, 8vw, 3rem) clamp(.55rem, 2.5vw, .85rem) 1.5rem;
-    background-position: var(--hero-bg-position-mobile, center center);
-  }
-  .hero.section-shell::before,
-  .hero.section-shell[data-subject-side="left"]::before {
-    background: linear-gradient(180deg, rgba(243,242,232,.98) 0%, rgba(243,242,232,.94) 62%, rgba(243,242,232,.72) 100%);
-  }
-  .hero .hero-copy,
-  .hero[data-subject-side="left"] .hero-copy {
-    width: 100%; max-width: 100%; min-width: 0;
-    margin: 0 auto; padding: 0; text-align: center;
-  }
-  .hero .eyebrow { margin-bottom: .5rem; font-size: var(--type-label); letter-spacing: .13em; }
-  .hero h1.couple-names { gap: clamp(.15rem, .9vw, .32rem); margin-top: .35rem; }
-  .hero h1.couple-names > .couple-name { font-size: var(--type-display); font-weight: 500; letter-spacing: -.025em; }
-  .hero h1.couple-names > .ampersand { font-size: clamp(.7rem, 2.7vw, .85rem); }
-  .hero .intro { max-width: 33rem; margin: .65rem auto .55rem; font-size: clamp(.82rem, 3.5vw, .9rem); line-height: 1.55; }
-  .hero .divider-heart { margin: .7rem auto .8rem; }
-  .hero .hero-date { margin-block: .7rem; font-size: var(--type-date); line-height: 1.35; letter-spacing: .015em; }
-  .hero-family-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.35rem, 1.7vw, .65rem); margin-top: .65rem; }
-  .hero-family-item { padding: 0 .08rem .2rem; }
-  .hero-family-label { margin-bottom: .22rem; font-size: var(--type-label); }
-  .hero-family-parents, .hero-family-address { font-size: var(--type-small); line-height: 1.45; }
-  .hero .text-link { margin-top: .45rem; font-size: var(--type-small); }
-  .hero .hero-image-placeholder { position: relative; inset: auto; width: min(100%, 18rem); min-height: 0; margin: 1.25rem auto 0; padding: .3rem; gap: .3rem; background: transparent; }
-  .hero .hero-image-placeholder small { max-width: 100%; overflow-wrap: anywhere; font-size: var(--type-small); }
-  .hero .hero-image-caption { font-size: clamp(1rem, 4vw, 1.25rem); }
-  .floral-hero-tl { width: clamp(4.6rem, 22vw, 6.5rem); left: -.2rem; top: -.2rem; opacity: .5; }
-  .floral-hero-br { width: clamp(5rem, 25vw, 7rem); right: -.4rem; bottom: -.55rem; opacity: .45; }
-
-  .countdown-section { padding: 1.6rem .65rem 1.45rem; }
-  .countdown-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.2rem, 1.2vw, .45rem); width: 100%; }
-  .count-card { min-width: 0; width: auto; padding: .25rem .08rem; }
-  .count-card strong { font-size: clamp(1.05rem, 4.5vw, 1.35rem); }
-  .count-card span { font-size: clamp(.65rem, 2.7vw, .78rem); }
-
-  .event-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; }
-  .event-card { min-width: 0; padding: .75rem .5rem; }
-  .event-card h3, .map-copy h3 { font-size: .95rem; line-height: 1.35; }
-  .event-card p, .map-copy p { font-size: .78rem; line-height: 1.5; }
-  .event-icon { width: 2.2rem; height: 2.2rem; margin-bottom: .45rem; }
-  .event-icon svg { width: 1.2rem; height: 1.2rem; }
-  .map-row { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
-  .map-placeholder { min-height: clamp(12rem, 55vw, 17rem); padding: 1rem; }
-  .map-copy { padding-inline: .1rem; }
-
-  .story-section { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; }
-  .story-copy, .story-visual { width: 100%; max-width: 100%; min-width: 0; }
-  .story-copy p:not(.section-kicker) { font-size: var(--type-body); line-height: 1.65; }
-  .gallery-section { padding-block: 2rem; }
-  .gallery-frame { padding: .8rem; }
-  .gallery-heading { align-items: flex-start; gap: .45rem; }
-  .gallery-heading h2 { font-size: var(--type-heading); }
-  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(4rem, 17vw, 5.8rem); gap: .4rem; }
-  .gallery-item--wide, .gallery-item--wide-short { grid-column: span 2; grid-row: span 2; }
-  .gallery-item--tall, .gallery-item--tall-small, .gallery-item--portrait { grid-column: span 1; grid-row: span 3; }
-  .gallery-item--square, .gallery-item--medium { grid-column: span 1; grid-row: span 2; }
-  .gallery-photo { min-width: 0; padding: .3rem; }
-  .gallery-photo strong { font-size: var(--type-label); }
-  .gallery-photo small { font-size: var(--type-small); overflow-wrap: anywhere; }
-
-  .rsvp-layout, .guestbook-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
-  .form-grid.two-col, .two-col, .form-inline-row { grid-template-columns: minmax(0, 1fr); }
-  .form-card, .wish-form { min-width: 0; padding: .9rem; }
-  .guestbook-section { width: calc(100% - 1rem); padding: 1.2rem .8rem; margin-inline: auto; }
-  .guestbook-heading { align-items: flex-start; flex-direction: column; gap: .45rem; }
-  .guestbook-form-col { position: static; max-width: 100%; }
-  .wish-actions { align-items: stretch; }
-  .wish-actions .accent-button { width: 100%; justify-content: center; }
-  .wishes-grid, .wishes-list { grid-template-columns: minmax(0, 1fr); }
-  .site-footer { padding: 1.4rem .75rem max(2rem, env(safe-area-inset-bottom)); }
-}
-
-/* Compact phones: keep content legible and allow the names to shrink only as needed. */
-@media (max-width: 350px) {
-  :root {
-    --page-gutter: .35rem;
-    --type-display: 1.05rem;
-    --type-body: .92rem;
-    --type-small: .8rem;
-    --type-label: .66rem;
-    --type-date: 1.08rem;
-  }
-  .main-nav { gap: .7rem; }
-  .main-nav a { font-size: .66rem; }
-  .hero.section-shell { width: calc(100% - .6rem); padding-inline: .35rem; }
-  .hero h1.couple-names { gap: .1rem; padding-inline: 0; }
-  .hero h1.couple-names > .couple-name { letter-spacing: -.035em; }
-  .hero h1.couple-names > .ampersand { font-size: .65rem; margin-inline: 0; }
-  .hero-family-grid { gap: .25rem; }
-  .hero-family-parents, .hero-family-address { font-size: .75rem; }
-  .event-grid { grid-template-columns: minmax(0, 1fr); }
-  .event-card { padding: .85rem; }
-  .countdown-grid { gap: .15rem; }
-  .count-card strong { font-size: 1rem; }
-  .gallery-frame { padding: .55rem; }
-  .gallery-grid { grid-auto-rows: 3.8rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-}
-
-
-/* =====================================================================
-   ANGELINE VINTAGE — couple-name font trial
-   The supplied demo font is included locally for testing only.
-   Note: this font has limited Latin glyph coverage and does NOT include
-   Vietnamese precomposed accented characters. Browsers will fallback for
-   unsupported glyphs, so mixed styling may appear in Vietnamese names.
-   ===================================================================== */
-@font-face {
-  font-family: "Angeline Vintage";
-  src: url("assets/fonts/AngelineVintage.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-/* Apply the decorative font only to the couple names, not the body text. */
-.hero h1.couple-names > .couple-name {
-  font-family: "Angeline Vintage", var(--script, "Parisienne"), cursive, var(--serif, "Cormorant Garamond"), Georgia, serif;
-  font-size: clamp(2rem, 3.05vw, 3.05rem);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -.025em;
+  line-height: 1.22;
+  letter-spacing: 0;
+  word-spacing: .08em;
   font-kerning: normal;
-  font-variant-ligatures: common-ligatures contextual;
+  font-variant-caps: normal;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   text-transform: none;
   white-space: nowrap;
-}
-
-/* Keep both names on one row while limiting width on intermediate screens. */
-@media (max-width: 1100px) and (min-width: 721px) {
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(1.2rem, 2.4vw, 1.8rem);
-    letter-spacing: -.035em;
-  }
-}
-
-@media (max-width: 720px) {
-  .hero h1.couple-names {
-    flex-wrap: nowrap;
-    gap: clamp(.08rem, .65vw, .22rem);
-    padding-inline: 0;
-    max-width: 100%;
-  }
-  .hero h1.couple-names > .couple-name {
-    flex: 0 1 auto;
-    min-width: 0;
-    font-size: clamp(.88rem, 3.85vw, 1.18rem);
-    letter-spacing: -.035em;
-    line-height: 1.28;
-  }
-  .hero h1.couple-names > .ampersand {
-    flex: 0 0 auto;
-    margin-inline: .02em;
-    font-size: clamp(.68rem, 2.55vw, .82rem);
-    line-height: 1;
-  }
-}
-
-@media (max-width: 350px) {
-  .hero h1.couple-names { gap: .03rem; }
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(.75rem, 3.35vw, .86rem);
-    letter-spacing: -.04em;
-  }
-  .hero h1.couple-names > .ampersand {
-    font-size: .62rem;
-    margin-inline: 0;
-  }
-}
-
-/* =====================================================================
-   ANGELINE VINTAGE SIZE PASS — 2026-10-19
-   Slightly larger type scale for desktop and mobile, while keeping the
-   couple names on one line. Brand lettering uses Angeline Vintage too.
-   ===================================================================== */
-@font-face {
-  font-family: "Angeline Vintage";
-  src: url("assets/fonts/AngelineVintage.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-:root {
-  --type-display: clamp(2.65rem, 4.05vw, 3.65rem);
-  --type-heading: clamp(1.75rem, 1.45rem + 1.08vw, 2.65rem);
-  --type-body: clamp(1rem, .96rem + .15vw, 1.05rem);
-  --type-small: clamp(.88rem, .85rem + .12vw, .96rem);
-  --type-label: clamp(.72rem, .70rem + .12vw, .82rem);
-  --type-date: clamp(1.45rem, 1.25rem + .76vw, 1.9rem);
-}
-
-/* Keep the original heart in its readable symbol font; stylize both names. */
-.brand > span:not(.brand-heart) {
-  font-family: "Angeline Vintage", var(--script, "Parisienne"), cursive, serif;
-  font-size: 1em;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -.018em;
-}
-
-.hero h1.couple-names > .couple-name {
-  font-size: clamp(2.55rem, 4.05vw, 3.6rem);
-  line-height: 1.24;
-  letter-spacing: -.025em;
-}
-
-.hero .intro {
-  font-size: clamp(1rem, .95rem + .15vw, 1.08rem);
-  line-height: 1.7;
-}
-
-.hero .eyebrow { font-size: var(--type-label); }
-.hero .hero-date { font-size: var(--type-date); }
-.hero-family-label { font-size: var(--type-label); }
-.hero-family-parents, .hero-family-address { font-size: var(--type-small); }
-
-@media (max-width: 1100px) and (min-width: 721px) {
-  :root {
-    --type-display: clamp(2.15rem, 3.2vw, 2.8rem);
-    --type-heading: clamp(1.65rem, 2.2vw, 2.15rem);
-    --type-body: 1rem;
-    --type-small: .88rem;
-    --type-label: .74rem;
-    --type-date: clamp(1.4rem, 2.5vw, 1.7rem);
-  }
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(1.8rem, 3.15vw, 2.2rem);
-    letter-spacing: -.035em;
-  }
-}
-
-@media (max-width: 720px) {
-  :root {
-    --type-display: clamp(1.02rem, 4.9vw, 1.3rem);
-    --type-heading: clamp(1.5rem, 5.4vw, 1.9rem);
-    --type-body: clamp(.98rem, 4.1vw, 1.03rem);
-    --type-small: clamp(.84rem, 3.7vw, .9rem);
-    --type-label: clamp(.72rem, 3.1vw, .78rem);
-    --type-date: clamp(1.2rem, 5vw, 1.5rem);
-  }
-  .brand > span:not(.brand-heart) { letter-spacing: -.025em; }
-  .hero h1.couple-names {
-    gap: clamp(.08rem, .55vw, .2rem);
-    padding-inline: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-  .hero h1.couple-names > .couple-name {
-    flex: 0 1 auto;
-    min-width: 0;
-    font-size: clamp(1.02rem, 4.9vw, 1.3rem);
-    letter-spacing: -.04em;
-    line-height: 1.3;
-  }
-  .hero h1.couple-names > .ampersand {
-    flex: 0 0 auto;
-    font-size: clamp(.7rem, 2.8vw, .86rem);
-    margin-inline: .015em;
-  }
-  .hero .intro {
-    font-size: clamp(.94rem, 3.8vw, 1rem);
-    line-height: 1.65;
-    margin-block: .75rem .65rem;
-  }
-  .hero .hero-date { font-size: clamp(1.2rem, 5vw, 1.5rem); }
-  .hero-family-label { font-size: clamp(.7rem, 3vw, .76rem); }
-  .hero-family-parents, .hero-family-address { font-size: clamp(.82rem, 3.65vw, .9rem); }
-  .count-card strong { font-size: clamp(1.15rem, 4.7vw, 1.4rem); }
-  .count-card span { font-size: clamp(.7rem, 2.85vw, .8rem); }
-}
-
-@media (max-width: 350px) {
-  .hero h1.couple-names { gap: .025rem; }
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(.9rem, 4.4vw, 1.03rem);
-    letter-spacing: -.045em;
-  }
-  .hero h1.couple-names > .ampersand { font-size: .64rem; }
-  .hero .intro { font-size: .9rem; }
-  .hero-family-parents, .hero-family-address { font-size: .8rem; }
-}
-
-
-/* =====================================================================
-   MOBILE HERO TYPOGRAPHY REFINEMENT — 2026-10-19
-   Stronger couple-name emphasis, visible separation around ampersand,
-   and a quieter invitation sentence. Desktop rules stay unchanged.
-   ===================================================================== */
-@media (max-width: 720px) {
-  .hero h1.couple-names {
-    gap: clamp(.28rem, 1.05vw, .42rem);
-    padding-inline: .08rem;
-    align-items: baseline;
-  }
-
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(1.12rem, 5.4vw, 1.42rem);
-    letter-spacing: -.02em;
-    line-height: 1.18;
-  }
-
-  .hero h1.couple-names > .ampersand {
-    flex: 0 0 auto;
-    font-size: clamp(.74rem, 3vw, .88rem);
-    margin-inline: .06em;
-    line-height: 1;
-  }
-
-  .hero .intro {
-    font-size: clamp(.79rem, 3.3vw, .88rem);
-    line-height: 1.52;
-    margin: .55rem auto .5rem;
-    max-width: 36rem;
-  }
-}
-
-@media (max-width: 350px) {
-  .hero h1.couple-names { gap: .24rem; padding-inline: 0; }
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(1rem, 4.7vw, 1.12rem);
-    letter-spacing: -.035em;
-  }
-  .hero h1.couple-names > .ampersand {
-    font-size: .68rem;
-    margin-inline: .025em;
-  }
-  .hero .intro { font-size: clamp(.76rem, 3.35vw, .82rem); }
-}
-
-
-/* =====================================================================
-   GREAT VIBES TRIAL — 2026-10-19
-   One handwritten family in the hero: couple names use Great Vibes;
-   the photo caption and footer sign-off use an elegant serif italic.
-   Date line is quieter on small screens to prioritize the couple names.
-   ===================================================================== */
-.brand > span:not(.brand-heart) {
-  font-family: "Great Vibes", cursive;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 0;
-  line-height: 1.05;
-}
-
-.hero h1.couple-names > .couple-name {
-  font-family: "Great Vibes", cursive;
-  font-size: clamp(2.45rem, 4.2vw, 3.35rem);
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 0;
-  line-height: 1.22;
-  text-transform: none;
-  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .hero h1.couple-names > .ampersand {
+  flex: 0 0 auto;
+  margin-inline: .12em;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(.95rem, 1.15vw, 1.18rem);
+  font-size: clamp(.9rem, 1.15vw, 1.18rem);
   font-style: italic;
   font-weight: 500;
   line-height: 1;
-  margin-inline: .12em;
 }
 
-/* Keep the decorative photo caption out of the handwritten font family. */
-.hero .hero-image-caption {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1rem, 1.7vw, 1.25rem);
-  font-style: italic;
-  font-weight: 500;
+.hero .intro {
+  max-width: 42rem;
+  margin-inline: auto;
+  text-wrap: pretty;
+}
+
+/* Three-line date block. The solar date remains the strongest line. */
+.hero .hero-date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.08rem, .28vw, .22rem);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--ds-ink-deep);
+}
+.hero .hero-date-block p {
+  max-width: 100%;
+  margin: 0;
+  font-family: var(--body, "Lora", Georgia, serif);
+  text-wrap: balance;
+  overflow-wrap: normal;
+}
+.hero .hero-date-time,
+.hero .hero-date-lunar {
+  color: #647365;
+  font-size: clamp(.96rem, 1.05vw, 1.08rem);
+  font-weight: 400;
+  line-height: 1.5;
   letter-spacing: .015em;
-  line-height: 1.35;
-  transform: rotate(-2deg);
+}
+.hero .hero-date-main {
+  margin-block: .06rem;
+  color: var(--ds-ink-deep);
+  font-size: clamp(1.3rem, 1.55vw, 1.48rem);
+  font-weight: 700;
+  line-height: 1.32;
+  letter-spacing: .015em;
 }
 
-/* The footer's sign-off is serif italic too, so it does not compete with the logo. */
-.site-footer p {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 1.12rem;
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: .025em;
-  line-height: 1.4;
+/* Family details stay balanced in two columns; size is fluid but readable. */
+.hero-family-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.45rem, 1vw, .9rem);
+  width: 100%;
+  max-width: 760px;
+  min-width: 0;
+  margin: 1rem auto 0;
+}
+.hero-family-item { min-width: 0; }
+.hero .hero-family-grid .hero-family-label {
+  margin-bottom: .3rem;
+  font-size: clamp(.78rem, .9vw, .86rem);
+  line-height: 1.45;
+}
+.hero .hero-family-grid .hero-family-parents {
+  font-size: clamp(.94rem, 1vw, 1.02rem);
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+.hero .hero-family-grid .hero-family-address {
+  margin-top: .28rem;
+  font-size: clamp(.85rem, .92vw, .94rem);
+  line-height: 1.52;
+  overflow-wrap: anywhere;
 }
 
-@media (max-width: 1100px) and (min-width: 721px) {
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(2.15rem, 3.35vw, 2.75rem);
-  }
-  .hero h1.couple-names { gap: clamp(.2rem, .8vw, .5rem); }
-}
-
-@media (max-width: 720px) {
-  .hero h1.couple-names {
-    gap: clamp(.28rem, 1vw, .42rem);
-    padding-inline: .08rem;
-    align-items: baseline;
-  }
-  .hero h1.couple-names > .couple-name {
-    flex: 0 1 auto;
-    min-width: 0;
-    font-size: clamp(1.15rem, 5.6vw, 1.5rem);
-    letter-spacing: 0;
-    line-height: 1.28;
-  }
-  .hero h1.couple-names > .ampersand {
-    flex: 0 0 auto;
-    font-size: clamp(.78rem, 3.1vw, .92rem);
-    margin-inline: .08em;
-    line-height: 1;
-  }
-  .hero .hero-date {
-    font-size: 1.2rem;
-    letter-spacing: .025em;
-    line-height: 1.35;
-  }
-  .hero .hero-image-caption {
-    font-size: clamp(.95rem, 3.6vw, 1.12rem);
-    margin-top: .45rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero .hero-date { font-size: 1.15rem; letter-spacing: .01em; }
-  .hero h1.couple-names { gap: clamp(.22rem, .8vw, .32rem); }
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(1.15rem, 5.7vw, 1.42rem);
-  }
-}
-
-@media (max-width: 350px) {
-  .hero h1.couple-names { gap: .18rem; padding-inline: 0; }
-  .hero h1.couple-names > .couple-name {
-    font-size: clamp(1.08rem, 5.25vw, 1.2rem);
-    letter-spacing: 0;
-  }
-  .hero h1.couple-names > .ampersand {
-    font-size: .72rem;
-    margin-inline: .04em;
-  }
-  .hero .hero-date { font-size: 1.1rem; letter-spacing: 0; }
-}
-
-/* =====================================================================
-   FLORAL MOTIF FLUID SCALE — 2026-10-19
-   All olive/leaf illustrations across the home and RSVP pages use fluid
-   sizing. Keep their position/rotation art-directed, but let dimensions
-   scale with viewport width instead of jumping between fixed pixel sizes.
-   ===================================================================== */
+/* Fluid images and decorative botanical motifs throughout both public pages. */
 .floral,
 .botanical-frame-overlay,
 .floral-footer-center {
@@ -619,411 +196,163 @@ input, select, textarea { width: 100%; }
   pointer-events: none;
   user-select: none;
 }
+.floral { object-fit: contain; }
 
-/* Hero corners */
 .hero .floral-hero-tl {
   width: clamp(8.5rem, 14vw, 13.5rem);
   left: clamp(-2rem, -2.3vw, -.7rem);
   top: clamp(-1.2rem, -1vw, -.2rem);
+  opacity: .78;
 }
 .hero .floral-hero-br {
   width: clamp(9.5rem, 17vw, 15rem);
   right: clamp(-2.3rem, -2.4vw, -.6rem);
   bottom: clamp(-2.4rem, -2.6vw, -.8rem);
+  opacity: .78;
+  transform: rotate(7deg);
 }
 .hero[data-subject-side="left"] .floral-hero-tl {
   left: auto;
   right: clamp(-2rem, -2.3vw, -.7rem);
+  transform: scaleX(-1);
 }
 .hero[data-subject-side="left"] .floral-hero-br {
   right: auto;
   left: clamp(-2.3rem, -2.4vw, -.6rem);
+  transform: scaleX(-1) rotate(7deg);
 }
-
-/* Countdown side sprigs. Existing mobile rules may intentionally hide them
-   to keep the four countdown cards readable; their dimensions remain fluid. */
 .countdown-wrap .floral-count-left,
 .countdown-wrap .floral-count-right {
-  height: clamp(4.5rem, 8vw, 7.5rem);
   width: auto;
+  height: clamp(4.5rem, 8vw, 7.5rem);
 }
-
-/* Schedule, story, gallery, RSVP, thank-you and guestbook decorations */
 .schedule-section > .floral-schedule {
   width: clamp(7.5rem, 15vw, 14rem);
   right: clamp(-2.5rem, -3vw, -1rem);
   top: clamp(-3rem, -4vw, -1.2rem);
-}
-.story-visual .story-floral {
-  width: clamp(6rem, 11vw, 10rem);
-}
-.story-visual .story-floral-petal {
-  width: clamp(3.5rem, 6vw, 5.5rem);
+  opacity: .2;
 }
 .gallery-section .gallery-floral {
   width: clamp(7rem, 18vw, 17.5rem);
   right: clamp(-3.75rem, -4vw, -1.25rem);
   bottom: clamp(-3rem, -4vw, -1rem);
+  opacity: .2;
 }
 .rsvp-cta .cta-floral-left,
 .rsvp-cta .cta-floral-right {
   width: clamp(6rem, 13vw, 12.5rem);
+  height: auto;
 }
 .rsvp-hero .rsvp-hero-left,
 .rsvp-hero .rsvp-hero-right {
   width: clamp(8.5rem, 18vw, 16rem);
+  height: auto;
+  opacity: .65;
 }
-.thankyou-card .thankyou-floral {
-  width: clamp(7.5rem, 13vw, 12rem);
-}
-.thankyou-card .thankyou-floral-petal {
-  width: clamp(3.5rem, 6vw, 6rem);
-}
-.guestbook-section .guestbook-floral {
-  width: clamp(8rem, 15vw, 14rem);
-}
+.thankyou-card .thankyou-floral { width: clamp(7.5rem, 13vw, 12rem); opacity: .24; }
+.thankyou-card .thankyou-floral-petal { width: clamp(3.5rem, 6vw, 6rem); opacity: .2; }
+.guestbook-section .guestbook-floral { width: clamp(8rem, 15vw, 14rem); opacity: .22; }
 .guestbook-section .guestbook-floral-bl,
-.guestbook-section .guestbook-floral-br {
-  width: clamp(6rem, 11vw, 10rem);
-}
-.floral-footer-center {
-  width: clamp(5.5rem, 10vw, 9rem);
-}
-.botanical-frame-story {
-  width: clamp(13rem, 28vw, 25rem);
-  height: auto;
-}
-.botanical-frame-guestbook {
-  width: clamp(12rem, 26vw, 23rem);
-  height: auto;
-}
+.guestbook-section .guestbook-floral-br { width: clamp(6rem, 11vw, 10rem); opacity: .18; }
+.floral-footer-center { width: clamp(5.5rem, 10vw, 9rem); opacity: .7; }
+/* The frame asset contains a long edge; it was intentionally removed from story. */
+.botanical-frame-story { display: none; }
+.botanical-frame-guestbook { opacity: .08; }
 
-/* On tablets and phones, motifs scale with the actual viewport width. */
-@media (max-width: 1100px) {
-  .hero .floral-hero-tl {
-    width: clamp(5rem, 17vw, 8.5rem);
-    left: -.3rem;
-    top: -.3rem;
-  }
-  .hero .floral-hero-br {
-    width: clamp(5.75rem, 20vw, 9.25rem);
-    right: -.5rem;
-    bottom: -.65rem;
-  }
-  .hero[data-subject-side="left"] .floral-hero-tl { left: auto; right: -.3rem; }
-  .hero[data-subject-side="left"] .floral-hero-br { right: auto; left: -.5rem; }
+/* Icons, cards and interactive controls should be allowed to shrink. */
+.event-grid,
+.gallery-grid,
+.countdown-grid,
+.rsvp-layout,
+.guestbook-layout,
+.form-grid,
+.two-col,
+.form-inline-row,
+.map-row { min-width: 0; }
+.event-card,
+.form-card,
+.wish-form,
+.wish-card,
+.map-copy,
+.hero-family-item { min-width: 0; }
+.event-card p,
+.map-copy p,
+.hero-family-parents,
+.hero-family-address,
+.wish-card p,
+.guestbook-heading p { overflow-wrap: anywhere; }
+.event-icon svg { display: block; width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.map-placeholder iframe { width: 100%; max-width: 100%; height: 100%; min-height: inherit; border: 0; }
+.map-placeholder-state { width: 100%; box-sizing: border-box; }
+.map-placeholder-state[hidden] { display: none; }
 
-  .countdown-wrap .floral-count-left,
-  .countdown-wrap .floral-count-right {
-    height: clamp(3.75rem, 8vw, 5.5rem);
-  }
-  .schedule-section > .floral-schedule { width: clamp(6rem, 17vw, 9.5rem); }
-  .story-visual .story-floral { width: clamp(5rem, 15vw, 7.5rem); }
-  .story-visual .story-floral-petal { width: clamp(3rem, 8vw, 4.5rem); }
-  .gallery-section .gallery-floral { width: clamp(6rem, 18vw, 8.5rem); }
-  .rsvp-cta .cta-floral-left,
-  .rsvp-cta .cta-floral-right { width: clamp(5rem, 13vw, 7rem); }
-  .rsvp-hero .rsvp-hero-left,
-  .rsvp-hero .rsvp-hero-right { width: clamp(6rem, 20vw, 9.5rem); }
-  .thankyou-card .thankyou-floral { width: clamp(5.5rem, 20vw, 8rem); }
-  .thankyou-card .thankyou-floral-petal { width: clamp(3rem, 12vw, 4.25rem); }
-  .guestbook-section .guestbook-floral { width: clamp(6rem, 22vw, 9rem); }
-  .guestbook-section .guestbook-floral-bl,
-  .guestbook-section .guestbook-floral-br { width: clamp(5rem, 17vw, 7rem); }
-  .floral-footer-center { width: clamp(4.5rem, 15vw, 6.5rem); }
-  .botanical-frame-story { width: clamp(10rem, 30vw, 15rem); }
-  .botanical-frame-guestbook { width: clamp(9rem, 27vw, 13rem); }
-}
-
-/* Smaller devices: keep the hero lettering clear and scale every visible
-   leaf illustration down proportionally; keep decorative overlays subtle. */
-@media (max-width: 720px) {
-  .hero .floral-hero-tl {
-    width: clamp(4.35rem, 22vw, 7rem);
-    left: -.2rem;
-    top: -.15rem;
-    opacity: .52;
-  }
-  .hero .floral-hero-br {
-    width: clamp(4.9rem, 25vw, 7.6rem);
-    right: -.35rem;
-    bottom: -.45rem;
-    opacity: .48;
-  }
-  .hero[data-subject-side="left"] .floral-hero-tl { left: auto; right: -.2rem; }
-  .hero[data-subject-side="left"] .floral-hero-br { right: auto; left: -.35rem; }
-
-  .countdown-wrap .floral-count-left,
-  .countdown-wrap .floral-count-right {
-    height: clamp(3.25rem, 14vw, 4.5rem);
-  }
-  .schedule-section > .floral-schedule {
-    width: clamp(5.5rem, 23vw, 8rem);
-    right: -1.2rem;
-    top: -1.1rem;
-  }
-  .story-visual .story-floral { width: clamp(4.5rem, 18vw, 6.5rem); }
-  .story-visual .story-floral-petal { width: clamp(2.75rem, 10vw, 3.8rem); }
-  .gallery-section .gallery-floral {
-    width: clamp(5.5rem, 23vw, 7.75rem);
-    right: -1.5rem;
-    bottom: -1.5rem;
-  }
-  .rsvp-cta .cta-floral-left,
-  .rsvp-cta .cta-floral-right { width: clamp(4.5rem, 18vw, 6.75rem); }
-  .rsvp-hero .rsvp-hero-left,
-  .rsvp-hero .rsvp-hero-right {
-    width: clamp(5.5rem, 23vw, 8rem);
-    opacity: .58;
-  }
-  .thankyou-card .thankyou-floral { width: clamp(5rem, 22vw, 7.5rem); opacity: .22; }
-  .thankyou-card .thankyou-floral-petal { width: clamp(2.75rem, 11vw, 3.75rem); opacity: .2; }
-  .guestbook-section .guestbook-floral { width: clamp(5.5rem, 24vw, 8rem); opacity: .15; }
-  .guestbook-section .guestbook-floral-bl,
-  .guestbook-section .guestbook-floral-br { width: clamp(4.5rem, 18vw, 6rem); }
-  .floral-footer-center { width: clamp(4.25rem, 17vw, 5.75rem); }
-
-  .botanical-frame-story {
-    width: clamp(8.5rem, 43vw, 13rem);
-    right: clamp(-5.5rem, -12vw, -3rem);
-    bottom: clamp(-3.7rem, -9vw, -2.2rem);
-  }
-  .botanical-frame-guestbook {
-    width: clamp(7.5rem, 38vw, 11rem);
-    right: clamp(-4rem, -10vw, -2.5rem);
-    top: auto;
-    bottom: clamp(-2.5rem, -7vw, -1.5rem);
-  }
-}
-
-@media (max-width: 350px) {
-  .hero .floral-hero-tl { width: clamp(4.1rem, 21vw, 4.8rem); }
-  .hero .floral-hero-br { width: clamp(4.6rem, 24vw, 5.5rem); }
-  .schedule-section > .floral-schedule { width: clamp(5rem, 22vw, 6.25rem); }
-  .gallery-section .gallery-floral { width: clamp(5rem, 22vw, 6.25rem); }
-  .rsvp-hero .rsvp-hero-left,
-  .rsvp-hero .rsvp-hero-right { width: clamp(5rem, 22vw, 6.25rem); }
-  .botanical-frame-story { width: clamp(7.5rem, 40vw, 9.5rem); }
-  .botanical-frame-guestbook { width: clamp(7rem, 36vw, 8.5rem); }
-}
-
-/* Great Vibes is a connected script: never tighten character spacing.
-   Slight word spacing adds breathing room between the three name words. */
-.hero h1.couple-names > .couple-name {
-  letter-spacing: 0;
-  word-spacing: .08em;
-}
-
-/* STORY VISUAL LAYOUT FIX — keep the hint below the overlapping photo cards.
-   The hint was a normal flex item, so it sat beside the main photo and ran
-   underneath the small photo on some viewport widths. */
-.story-visual.story-gallery-trigger {
-  position: relative;
+/* Structured address lines: inline labels, separated with hyphens. */
+.event-address-parts,
+.map-location-address-parts {
   display: block;
-  width: 100%;
   min-width: 0;
-  min-height: clamp(22rem, 29vw, 25rem);
-  padding: .5rem 0 3.5rem;
-  isolation: isolate;
-  overflow: visible;
+  margin-top: .3rem;
+  line-height: 1.55;
 }
-
-.story-visual.story-gallery-trigger > .photo-story {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  width: min(68%, 23rem);
-  max-width: 72%;
-  height: clamp(14rem, 21vw, 18.75rem);
-  margin: 0 auto;
-  transform: rotate(-3deg);
-}
-
-.story-visual.story-gallery-trigger > .photo-story-small {
-  position: absolute;
-  z-index: 3;
-  right: clamp(.35rem, 3%, 1.25rem);
-  bottom: 3.25rem;
-  width: clamp(6.5rem, 31%, 10rem);
-  height: clamp(8.25rem, 15vw, 11.5rem);
-  transform: rotate(7deg);
-}
-
-.story-visual.story-gallery-trigger > .story-gallery-hint {
-  position: absolute;
-  z-index: 5;
-  left: 50%;
-  bottom: .25rem;
-  display: block;
-  width: max-content;
-  max-width: calc(100% - 1rem);
+.event-address-parts { text-align: center; }
+.map-location-address-parts { text-align: left; line-height: 1.65; }
+.event-address-part,
+.map-copy .map-location-address-part {
+  display: inline;
   margin: 0;
-  padding: .45rem .8rem;
-  transform: translateX(-50%);
-  box-sizing: border-box;
-  line-height: 1.4;
-  text-align: center;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  border: 1px solid var(--ds-border, #d6d4c5);
-  border-radius: 999px;
-  background: rgba(251, 250, 244, .97);
-  box-shadow: 0 3px 12px rgba(65, 70, 62, .04);
+  color: var(--ds-sage-soft-text);
+  font-size: clamp(.9rem, .97vw, .99rem);
+  line-height: inherit;
+  overflow-wrap: normal;
+  word-break: normal;
 }
-
-.story-visual.story-gallery-trigger > .story-floral,
-.story-visual.story-gallery-trigger > .story-floral-petal {
-  position: absolute;
-  pointer-events: none;
+.map-copy .map-location-address-part { color: var(--ds-muted, var(--ds-muted)); font-size: .9rem; }
+.event-address-part + .event-address-part::before,
+.map-copy .map-location-address-part + .map-location-address-part::before {
+  content: " - ";
+  white-space: pre;
+  color: var(--ds-olive, var(--ds-olive));
 }
-.story-visual.story-gallery-trigger > .story-floral { z-index: 2; }
-.story-visual.story-gallery-trigger > .story-floral-petal { z-index: 0; }
+.event-address-label,
+.map-location-address-label { color: var(--ds-olive, var(--ds-olive)); font-weight: 600; }
+.event-address-parts[hidden],
+.map-location-address-parts[hidden],
+.event-venue[hidden],
+.event-address[hidden],
+.map-location-venue[hidden],
+.map-location-address[hidden] { display: none; }
 
-/* Stack the story at tablet sizes too: two narrow columns caused copy clipping
-   and made the photo composition crowd the text around a 700–900px viewport. */
-@media (max-width: 900px) {
-  .story-section {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: clamp(1.25rem, 4vw, 2rem);
-    min-width: 0;
-    overflow: clip;
-  }
-  .story-copy {
-    width: 100%;
-    max-width: 48rem;
-    min-width: 0;
-    margin-inline: auto;
-  }
-  .story-visual.story-gallery-trigger {
-    min-height: clamp(22rem, 55vw, 24rem);
-    padding-bottom: 3.35rem;
-  }
-  .story-visual.story-gallery-trigger > .photo-story {
-    width: min(68%, 23rem);
-    height: clamp(13.5rem, 34vw, 15rem);
-  }
-  .story-visual.story-gallery-trigger > .photo-story-small {
-    bottom: 3.15rem;
-    width: clamp(6.5rem, 29%, 9rem);
-    height: clamp(8rem, 22vw, 9.5rem);
-  }
-  .botanical-frame-story {
-    width: clamp(8rem, 28vw, 12rem);
-    right: clamp(-4rem, -8vw, -2rem);
-    bottom: clamp(-3rem, -7vw, -1.5rem);
-    opacity: .08;
-  }
+/* The schedule cards use a readable scale independent of the other body copy. */
+.schedule-section .location-options .event-card .event-icon {
+  width: clamp(2.65rem, 3vw, 3rem);
+  height: clamp(2.65rem, 3vw, 3rem);
+  margin-bottom: .7rem;
 }
-
-@media (max-width: 480px) {
-  .story-section { padding-inline: clamp(.85rem, 4vw, 1.25rem); }
-  .story-visual.story-gallery-trigger {
-    min-height: 22rem;
-    padding-top: .25rem;
-    padding-bottom: 3.3rem;
-  }
-  .story-visual.story-gallery-trigger > .photo-story {
-    width: min(70%, 20rem);
-    height: clamp(13.5rem, 56vw, 14.25rem);
-  }
-  .story-visual.story-gallery-trigger > .photo-story-small {
-    right: .35rem;
-    bottom: 3.1rem;
-    width: clamp(6.25rem, 30%, 7.5rem);
-    height: clamp(7.75rem, 34vw, 8.5rem);
-  }
-  .story-visual.story-gallery-trigger > .story-gallery-hint {
-    max-width: calc(100% - .5rem);
-    padding: .4rem .65rem;
-    font-size: clamp(.75rem, 3.2vw, .875rem);
-  }
+.schedule-section .location-options .event-card .event-icon svg { width: 1.55rem; height: 1.55rem; }
+.schedule-section .location-options .event-card h3 {
+  margin: 0 0 .7rem;
+  font-size: clamp(1.12rem, 1.28vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.38;
 }
-
-/* =====================================================================
-   HERO FAMILY DETAILS — INCREASED READABILITY
-   Keep both family columns balanced while making labels, parents and
-   addresses easier to read across desktop, tablet and narrow phones.
-   This final override intentionally follows earlier responsive rules.
-   ===================================================================== */
-.hero .hero-family-grid .hero-family-label {
-  font-size: clamp(.78rem, .9vw, .86rem);
-  line-height: 1.45;
-  margin-bottom: .3rem;
+.schedule-section .location-options .event-card .event-time,
+.schedule-section .location-options .event-card .event-venue,
+.schedule-section .location-options .event-card .event-address {
+  margin-block: .38rem;
+  font-size: clamp(.98rem, 1.02vw, 1.06rem);
+  line-height: 1.55;
 }
+.schedule-section .location-options .event-card .event-address-parts { margin-top: .45rem; line-height: 1.65; }
+.schedule-section .location-options .event-card .event-address-part { font-size: clamp(.9rem, .97vw, .99rem); }
 
-.hero .hero-family-grid .hero-family-parents {
-  font-size: clamp(.95rem, 1vw, 1.02rem);
-  line-height: 1.48;
-}
-
-.hero .hero-family-grid .hero-family-address {
-  font-size: clamp(.86rem, .92vw, .94rem);
-  line-height: 1.52;
-  margin-top: .28rem;
-}
-
-@media (max-width: 720px) {
-  .hero .hero-family-grid {
-    gap: clamp(.3rem, 1.4vw, .55rem);
-  }
-
-  .hero .hero-family-grid .hero-family-label {
-    font-size: clamp(.72rem, 3.05vw, .82rem);
-    line-height: 1.4;
-    margin-bottom: .24rem;
-    letter-spacing: .13em;
-  }
-
-  .hero .hero-family-grid .hero-family-parents {
-    font-size: clamp(.88rem, 3.7vw, 1rem);
-    line-height: 1.45;
-  }
-
-  .hero .hero-family-grid .hero-family-address {
-    font-size: clamp(.8rem, 3.4vw, .9rem);
-    line-height: 1.45;
-    margin-top: .24rem;
-  }
-}
-
-@media (max-width: 350px) {
-  .hero .hero-family-grid {
-    column-gap: .2rem;
-  }
-
-  .hero .hero-family-grid .hero-family-label {
-    font-size: .7rem;
-    letter-spacing: .1em;
-  }
-
-  .hero .hero-family-grid .hero-family-parents {
-    font-size: .84rem;
-    line-height: 1.4;
-  }
-
-  .hero .hero-family-grid .hero-family-address {
-    font-size: .77rem;
-    line-height: 1.4;
-  }
-}
-
-
-
-/* =====================================================================
-   STORY PHOTO COMPOSITION FIX — 2026-10-19
-   Remove the oversized olive-frame overlay from the story section (its
-   transparent frame asset contains a long lower edge that reads as a stray
-   horizontal line). Keep the two small sprigs around the photo placeholders.
-   Reserve a dedicated row for the album hint so it never touches a photo.
-   ===================================================================== */
+/* Story photo composition: keep two staggered cards and reserve space for hint. */
 .story-section {
   position: relative;
   isolation: isolate;
+  min-width: 0;
   overflow: clip;
 }
-
+.story-copy { min-width: 0; }
 .story-visual.story-gallery-trigger {
   position: relative;
   display: block;
@@ -1033,8 +362,8 @@ input, select, textarea { width: 100%; }
   padding: .4rem 0 4.1rem;
   box-sizing: border-box;
   isolation: isolate;
+  cursor: pointer;
 }
-
 .story-visual.story-gallery-trigger > .photo-story {
   position: relative;
   z-index: 1;
@@ -1045,7 +374,6 @@ input, select, textarea { width: 100%; }
   margin: .15rem auto 0;
   transform: rotate(-2.5deg);
 }
-
 .story-visual.story-gallery-trigger > .photo-story-small {
   position: absolute;
   z-index: 3;
@@ -1055,7 +383,6 @@ input, select, textarea { width: 100%; }
   height: clamp(8.5rem, 15vw, 10.5rem);
   transform: rotate(6deg);
 }
-
 .story-visual.story-gallery-trigger > .story-gallery-hint {
   position: absolute;
   z-index: 5;
@@ -1072,12 +399,11 @@ input, select, textarea { width: 100%; }
   text-align: center;
   white-space: normal;
   overflow-wrap: anywhere;
-  border: 1px solid var(--ds-border, #d6d4c5);
+  border: 1px solid var(--ds-border, var(--ds-border));
   border-radius: 999px;
   background: rgba(251, 250, 244, .97);
   box-shadow: 0 3px 12px rgba(65, 70, 62, .04);
 }
-
 .story-visual.story-gallery-trigger > .story-floral {
   position: absolute;
   left: clamp(.5rem, 6%, 2rem);
@@ -1088,7 +414,6 @@ input, select, textarea { width: 100%; }
   z-index: 2;
   pointer-events: none;
 }
-
 .story-visual.story-gallery-trigger > .story-floral-petal {
   position: absolute;
   right: clamp(.9rem, 5%, 1.8rem);
@@ -1100,17 +425,15 @@ input, select, textarea { width: 100%; }
   pointer-events: none;
   transform: rotate(22deg);
 }
-
 .story-visual.story-gallery-trigger .photo-icon {
   display: block;
   width: 1.65rem;
   height: 1.45rem;
-  color: var(--sage, #84937f);
+  color: var(--ds-sage-muted);
   opacity: .78;
   font-size: 0;
   line-height: 0;
 }
-
 .story-visual.story-gallery-trigger .photo-icon svg {
   display: block;
   width: 100%;
@@ -1122,73 +445,528 @@ input, select, textarea { width: 100%; }
   stroke-linejoin: round;
 }
 
-@media (max-width: 900px) {
-  .story-section { overflow: clip; }
-  .story-visual.story-gallery-trigger {
-    min-height: clamp(22rem, 55vw, 24rem);
-    padding: .25rem 0 4rem;
-  }
-  .story-visual.story-gallery-trigger > .photo-story {
-    width: min(68%, 21rem);
-    height: clamp(13rem, 34vw, 15rem);
-  }
-  .story-visual.story-gallery-trigger > .photo-story-small {
-    right: clamp(.7rem, 4%, 1.15rem);
-    bottom: 3.95rem;
-    width: clamp(6.5rem, 29%, 8.5rem);
-    height: clamp(8rem, 22vw, 9.25rem);
-  }
-  .story-visual.story-gallery-trigger > .story-floral {
-    width: clamp(5rem, 13vw, 6.75rem);
-    left: clamp(.35rem, 4%, .9rem);
-    bottom: 2.3rem;
-  }
-  .story-visual.story-gallery-trigger > .story-floral-petal {
-    width: clamp(2.75rem, 8vw, 3.75rem);
-    right: clamp(.65rem, 4%, 1rem);
-  }
+/* Gallery layout adapts its column count; existing variable spans remain valid. */
+.gallery-section[hidden] { display: none; }
+.gallery-grid { grid-auto-flow: dense; align-items: stretch; }
+.gallery-photo { min-width: 0; min-height: 0; }
+.gallery-photo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+
+/* Form safety: radio controls keep their natural dimensions. */
+.form-card input[type="radio"],
+.form-card .attend-fieldset .radio-line input[type="radio"] {
+  appearance: auto;
+  accent-color: var(--ds-olive, var(--ds-olive));
+  display: inline-block;
+  width: 1rem;
+  min-width: 1rem;
+  max-width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+  margin: .15em 0 0;
+  padding: 0;
+}
+.form-card .attend-fieldset .radio-line {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: .55rem;
+  width: 100%;
+  margin: .45rem 0;
+  text-align: left;
+}
+.form-card .attend-fieldset .radio-line > span {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  overflow-wrap: normal;
 }
 
-@media (max-width: 480px) {
-  .story-visual.story-gallery-trigger {
-    min-height: 22rem;
-    padding: .15rem 0 3.9rem;
-  }
-  .story-visual.story-gallery-trigger > .photo-story {
-    width: min(70%, 19rem);
-    height: clamp(13.2rem, 56vw, 14.1rem);
-    margin-top: .15rem;
-  }
-  .story-visual.story-gallery-trigger > .photo-story-small {
-    right: clamp(.55rem, 3.5vw, .8rem);
-    bottom: 3.85rem;
-    width: clamp(6.25rem, 30%, 7.25rem);
-    height: clamp(7.75rem, 34vw, 8.5rem);
-  }
-  .story-visual.story-gallery-trigger > .story-gallery-hint {
-    max-width: calc(100% - .5rem);
-    padding: .4rem .6rem;
-    font-size: clamp(.75rem, 3.2vw, .875rem);
-  }
-  .story-visual.story-gallery-trigger > .story-floral { bottom: 2.2rem; }
+/* ------------------------- Wide desktop ------------------------- */
+@media (min-width: 1500px) {
+  .hero.section-shell { min-height: 44.5rem; }
+  .hero .hero-image-placeholder { min-height: 22rem; }
 }
 
+/* --------------------- Compact desktop -------------------------- */
+@media (max-width: 1099px) and (min-width: 850px) {
+  :root {
+    --page-gutter: clamp(1rem, 2.2vw, 1.5rem);
+    --section-space: clamp(2.5rem, 5vw, 4rem);
+    --type-display: clamp(2.2rem, 3.2vw, 2.75rem);
+    --type-heading: clamp(1.8rem, 2.5vw, 2.2rem);
+    --type-date: clamp(1.35rem, 2.2vw, 1.65rem);
+  }
+  .site-header { gap: .75rem; padding-inline: clamp(1rem, 2vw, 1.5rem); }
+  .brand { font-size: clamp(1.9rem, 2.8vw, 2.25rem); }
+  .main-nav { gap: clamp(.45rem, .9vw, .8rem); }
+  .main-nav a { font-size: var(--type-label); }
+  .main-nav .nav-cta { padding-inline: .6rem; }
+  .header-actions { gap: .5rem; }
+  .hero.section-shell { padding: clamp(2.2rem, 4vw, 3.2rem); min-height: clamp(35rem, 52vw, 39rem); }
+  .hero h1.couple-names { gap: clamp(.25rem, .8vw, .5rem); }
+  .hero h1.couple-names > .couple-name { font-size: clamp(2.1rem, 3.35vw, 2.75rem); }
+  .hero-family-grid { gap: .6rem; }
+  .hero .hero-family-grid .hero-family-item { padding-inline: .15rem; }
+  .event-grid { gap: clamp(.65rem, 1.3vw, 1rem); }
+  .schedule-section .location-options .event-card { padding: clamp(.9rem, 1.6vw, 1.2rem); }
+  .schedule-section .location-options .event-card h3 { font-size: clamp(1.05rem, 1.5vw, 1.15rem); }
+  .schedule-section .location-options .event-card .event-time,
+  .schedule-section .location-options .event-card .event-venue,
+  .schedule-section .location-options .event-card .event-address { font-size: .95rem; }
+  .schedule-section .location-options .event-card .event-address-part { font-size: .88rem; }
+  .story-section { gap: clamp(1.5rem, 3.3vw, 2.5rem); }
+  .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .rsvp-layout { grid-template-columns: minmax(0, 1.25fr) minmax(13rem, .75fr); }
+  .guestbook-layout { grid-template-columns: minmax(14rem, .8fr) minmax(0, 1.4fr); }
+}
+
+/* ---------------------------- Tablet ---------------------------- */
+@media (max-width: 849px) and (min-width: 651px) {
+  :root {
+    --page-gutter: clamp(.8rem, 2vw, 1.25rem);
+    --section-space: clamp(2.2rem, 5vw, 3.8rem);
+    --type-display: clamp(1.8rem, 3.5vw, 2.45rem);
+    --type-heading: clamp(1.65rem, 2.6vw, 2.1rem);
+    --type-body: clamp(.96rem, 1.5vw, 1.02rem);
+    --type-small: clamp(.84rem, 1.3vw, .92rem);
+    --type-label: clamp(.7rem, 1.1vw, .78rem);
+    --type-date: clamp(1.12rem, 2.7vw, 1.45rem);
+  }
+  html { scroll-padding-top: 5.5rem; }
+  section[id] { scroll-margin-top: 5.5rem; }
+
+  /* Header takes two rows and its nav can scroll horizontally instead of wrapping. */
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: .35rem .65rem;
+    min-height: 0;
+    padding: .55rem clamp(.75rem, 2vw, 1rem) .3rem;
+  }
+  .brand { grid-column: 1; grid-row: 1; min-width: 0; font-size: clamp(1.8rem, 4.5vw, 2.2rem); }
+  .header-actions { grid-column: 2; grid-row: 1; display: flex; align-items: center; gap: .4rem; margin-left: auto; }
+  .lang-toggle { min-width: 44px; min-height: 44px; justify-content: center; padding: .24rem .45rem; font-size: .72rem; }
+  .main-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: clamp(.8rem, 2vw, 1.15rem);
+    width: 100%;
+    min-width: 0;
+    padding: .1rem .2rem .3rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, var(--ds-black) 94%, transparent 100%);
+    font-size: .76rem;
+  }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: .25rem 0; font-size: .76rem; white-space: nowrap; }
+  .main-nav .nav-cta { padding: .22rem .55rem; }
+
+  .section-shell { width: calc(100% - var(--page-gutter) - var(--page-gutter)); }
+  .section-pad { padding-block: var(--section-space); }
+  .hero.section-shell {
+    width: calc(100% - var(--page-gutter) - var(--page-gutter));
+    min-height: clamp(32rem, 66vw, 39rem);
+    padding: clamp(1.7rem, 3.5vw, 2.4rem) clamp(1rem, 2.6vw, 1.6rem);
+    grid-template-columns: minmax(0, 72%) minmax(0, 28%);
+  }
+  .hero .hero-copy { max-width: 100%; min-width: 0; padding: .25rem .5rem .25rem 0; }
+  .hero h1.couple-names { gap: clamp(.18rem, .65vw, .42rem); padding-inline: 0; }
+  .hero h1.couple-names > .couple-name { font-size: clamp(1.7rem, 3.5vw, 2.35rem); }
+  .hero h1.couple-names > .ampersand { font-size: clamp(.72rem, 1.7vw, .95rem); margin-inline: .04em; }
+  .hero .intro { font-size: clamp(.82rem, 1.7vw, .94rem); line-height: 1.55; margin-block: .6rem .45rem; }
+  .hero .divider-heart { margin-block: .55rem .65rem; }
+  .hero .hero-date-time, .hero .hero-date-lunar { font-size: clamp(.86rem, 1.75vw, .97rem); }
+  .hero .hero-date-main { font-size: clamp(1.02rem, 2.45vw, 1.25rem); letter-spacing: 0; }
+  .hero-family-grid { gap: clamp(.25rem, .8vw, .55rem); margin-top: .75rem; }
+  .hero .hero-family-grid .hero-family-label { font-size: clamp(.67rem, 1.3vw, .76rem); letter-spacing: .11em; }
+  .hero .hero-family-grid .hero-family-parents { font-size: clamp(.78rem, 1.6vw, .9rem); line-height: 1.42; }
+  .hero .hero-family-grid .hero-family-address { font-size: clamp(.72rem, 1.4vw, .84rem); line-height: 1.42; }
+  .hero .hero-image-placeholder { min-height: 13rem; padding: .5rem .25rem; gap: .45rem; }
+  .hero .hero-image-placeholder strong { font-size: .65rem; }
+  .hero .hero-image-placeholder small { max-width: 100%; padding: .25rem .4rem; font-size: .72rem; }
+  .hero .hero-image-caption { font-size: clamp(.9rem, 1.8vw, 1.08rem); margin-top: .4rem; }
+  .hero .floral-hero-tl { width: clamp(5.7rem, 12vw, 7.5rem); left: -.35rem; top: -.35rem; opacity: .55; }
+  .hero .floral-hero-br { width: clamp(6.2rem, 13vw, 8.3rem); right: -.45rem; bottom: -.65rem; opacity: .5; }
+
+  .countdown-section { min-height: 0; padding: 2rem .85rem 1.8rem; }
+  .countdown-wrap { padding-inline: .4rem; }
+  .countdown-wrap .floral-count-left,
+  .countdown-wrap .floral-count-right { display: none; }
+  .countdown-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.35rem, 1.1vw, .65rem); width: min(100%, 38rem); }
+  .count-card { width: auto; min-width: 0; height: clamp(3.8rem, 7vw, 4.6rem); padding: .35rem .15rem; }
+  .count-card strong { font-size: clamp(1.2rem, 3.1vw, 1.55rem); }
+  .count-card span { font-size: clamp(.68rem, 1.4vw, .8rem); }
+
+  /* Two cards per row; the third card is centered as in the reference layout. */
+  .event-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.65rem, 1.5vw, 1rem); }
+  .event-card { min-height: 0; padding: clamp(.9rem, 1.8vw, 1.2rem); }
+  .event-card:nth-child(3):last-child { grid-column: 1 / -1; justify-self: center; width: min(100%, 29rem); }
+  .schedule-section .location-options .event-card h3 { font-size: clamp(1rem, 1.8vw, 1.12rem); margin-bottom: .55rem; }
+  .schedule-section .location-options .event-card .event-time,
+  .schedule-section .location-options .event-card .event-venue,
+  .schedule-section .location-options .event-card .event-address { font-size: clamp(.86rem, 1.55vw, .95rem); line-height: 1.5; }
+  .schedule-section .location-options .event-card .event-address-part { font-size: clamp(.78rem, 1.45vw, .88rem); }
+  .map-row { grid-template-columns: minmax(0, 1fr); gap: 1.1rem; margin-top: 1.3rem; }
+  .map-placeholder { min-height: clamp(13rem, 32vw, 18rem); }
+  .map-placeholder iframe { min-height: 100%; }
+
+  .story-section { display: flex; flex-direction: column; align-items: stretch; gap: 1.25rem; padding: clamp(1.6rem, 4vw, 2.5rem); }
+  .story-copy, .story-visual { width: 100%; max-width: 100%; min-width: 0; }
+  .story-copy h2 { font-size: var(--type-heading); }
+  .story-copy p:not(.section-kicker) { font-size: var(--type-body); line-height: 1.7; }
+  .story-visual.story-gallery-trigger { min-height: clamp(22rem, 46vw, 24rem); padding-bottom: 3.9rem; }
+  .story-visual.story-gallery-trigger > .photo-story { width: min(66%, 22rem); height: clamp(13rem, 26vw, 15.5rem); }
+  .story-visual.story-gallery-trigger > .photo-story-small { right: clamp(.6rem, 4%, 1rem); bottom: 3.8rem; width: clamp(6.5rem, 23vw, 8rem); height: clamp(8rem, 18vw, 9.5rem); }
+  .story-visual.story-gallery-trigger > .story-gallery-hint { bottom: .3rem; max-width: calc(100% - .8rem); font-size: .86rem; }
+  .story-visual.story-gallery-trigger > .story-floral { width: clamp(4.8rem, 10vw, 6.6rem); bottom: 2.15rem; left: .6rem; }
+  .story-visual.story-gallery-trigger > .story-floral-petal { width: clamp(2.8rem, 6vw, 3.7rem); right: .8rem; }
+
+  .gallery-section { padding-block: clamp(2rem, 4vw, 3rem); }
+  .gallery-frame { padding: clamp(.8rem, 2vw, 1.25rem); }
+  .gallery-heading { align-items: flex-start; gap: .75rem; }
+  .gallery-heading h2 { font-size: var(--type-heading); }
+  .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(4rem, 8vw, 5.5rem); gap: .55rem; }
+  .gallery-item--wide, .gallery-item--wide-short { grid-column: span 2; grid-row: span 2; }
+  .gallery-item--tall, .gallery-item--tall-small, .gallery-item--portrait { grid-column: span 1; grid-row: span 3; }
+  .gallery-item--square, .gallery-item--medium { grid-column: span 1; grid-row: span 2; }
+
+  .rsvp-form-section { padding-block: clamp(2rem, 4vw, 3.2rem); }
+  .rsvp-layout, .guestbook-layout { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+  .form-card { padding: clamp(1rem, 2.5vw, 1.6rem); }
+  .guestbook-section { padding: clamp(1.2rem, 3vw, 2rem); margin-bottom: 2.5rem; }
+  .guestbook-layout { margin-top: .85rem; }
+  .guestbook-form-col { position: static; max-width: 100%; }
+  .wishes-grid, .wishes-list { max-height: 28rem; }
+  .wish-actions { flex-wrap: wrap; }
+  .site-footer { padding-bottom: max(2rem, env(safe-area-inset-bottom)); }
+}
+
+/* --------------------------- Mobile ----------------------------- */
+@media (max-width: 550px) {
+  :root {
+    --page-gutter: .55rem;
+    --section-space: clamp(2rem, 7vw, 2.8rem);
+    --type-display: clamp(1.12rem, 5.4vw, 1.5rem);
+    --type-heading: clamp(1.48rem, 5.3vw, 1.85rem);
+    --type-subheading: 1.08rem;
+    --type-body: clamp(.96rem, 3.8vw, 1rem);
+    --type-small: clamp(.82rem, 3.4vw, .9rem);
+    --type-label: clamp(.68rem, 2.8vw, .75rem);
+    --type-date: clamp(1.08rem, 4.4vw, 1.35rem);
+  }
+  html { scroll-padding-top: 5.15rem; }
+  section[id] { scroll-margin-top: 5.15rem; }
+
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: .3rem .45rem;
+    min-height: 0;
+    padding: .42rem clamp(.5rem, 2.3vw, .8rem) .22rem;
+  }
+  .brand { grid-column: 1; grid-row: 1; min-width: 0; font-size: clamp(1.55rem, 6.8vw, 2.1rem); }
+  .header-actions { grid-column: 2; grid-row: 1; display: flex; align-items: center; gap: .3rem; margin-left: auto; }
+  .lang-toggle { min-width: 44px; min-height: 44px; justify-content: center; padding: .2rem .38rem; font-size: .67rem; }
+  .music-toggle { min-width: 44px; min-height: 44px; justify-content: center; font-size: 1rem; }
+  .main-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: clamp(.72rem, 3.2vw, 1rem);
+    width: 100%;
+    min-width: 0;
+    padding: .08rem .12rem .25rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, var(--ds-black) 94%, transparent 100%);
+    font-size: .7rem;
+  }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: .22rem 0; font-size: .7rem; white-space: nowrap; }
+  .main-nav .nav-cta { padding: .2rem .45rem; }
+
+  .section-shell,
+  .hero.section-shell { width: calc(100% - .85rem); }
+  .section-pad { padding-block: clamp(1.9rem, 7vw, 2.7rem); }
+  .hero.section-shell {
+    display: block;
+    min-height: 0;
+    padding: clamp(2rem, 7.5vw, 2.75rem) clamp(.5rem, 2.5vw, .8rem) 1.35rem;
+    background-position: var(--hero-bg-position-mobile, center center);
+  }
+  .hero.section-shell::before,
+  .hero.section-shell[data-subject-side="left"]::before {
+    background: linear-gradient(180deg, rgba(243,242,232,.985) 0%, rgba(243,242,232,.95) 56%, rgba(243,242,232,.8) 100%);
+  }
+  .hero .hero-copy,
+  .hero[data-subject-side="left"] .hero-copy {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
+  .hero .eyebrow { margin-bottom: .45rem; font-size: var(--type-label); letter-spacing: .13em; }
+  .hero h1.couple-names {
+    gap: clamp(.22rem, .95vw, .38rem);
+    margin-top: .28rem;
+    padding-inline: 0;
+    align-items: baseline;
+  }
+  .hero h1.couple-names > .couple-name {
+    flex: 0 1 auto;
+    min-width: 0;
+    font-size: clamp(1.12rem, 5.4vw, 1.5rem);
+    line-height: 1.25;
+    letter-spacing: 0;
+    word-spacing: .08em;
+  }
+  .hero h1.couple-names > .ampersand {
+    flex: 0 0 auto;
+    font-size: clamp(.72rem, 3vw, .88rem);
+    margin-inline: .045em;
+    line-height: 1;
+  }
+  .hero .intro {
+    max-width: 100%;
+    margin: .55rem auto .45rem;
+    font-size: clamp(.79rem, 3.25vw, .88rem);
+    line-height: 1.52;
+  }
+  .hero .divider-heart { margin: .55rem auto .7rem; }
+  .hero .hero-date-block { gap: .09rem; padding-inline: .1rem; }
+  .hero .hero-date-time,
+  .hero .hero-date-lunar { font-size: clamp(.84rem, 3.35vw, .96rem); line-height: 1.43; }
+  .hero .hero-date-main { font-size: clamp(1rem, 3.8vw, 1.22rem); line-height: 1.3; letter-spacing: 0; }
+  .hero-family-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.25rem, 1.3vw, .5rem); margin-top: .65rem; }
+  .hero-family-item { padding-inline: .08rem; }
+  .hero .hero-family-grid .hero-family-label { font-size: clamp(.68rem, 2.8vw, .78rem); line-height: 1.4; margin-bottom: .2rem; letter-spacing: .12em; }
+  .hero .hero-family-grid .hero-family-parents { font-size: clamp(.82rem, 3.4vw, .94rem); line-height: 1.42; }
+  .hero .hero-family-grid .hero-family-address { font-size: clamp(.76rem, 3.1vw, .86rem); line-height: 1.42; margin-top: .2rem; }
+  .hero .text-link { margin-top: .45rem; font-size: var(--type-small); }
+  .hero .hero-image-placeholder {
+    position: relative;
+    inset: auto;
+    width: min(100%, 18rem);
+    min-height: 0;
+    margin: 1.15rem auto 0;
+    padding: .28rem;
+    gap: .3rem;
+    background: transparent;
+  }
+  .hero .hero-image-placeholder strong { font-size: .68rem; }
+  .hero .hero-image-placeholder small { max-width: 100%; font-size: var(--type-small); overflow-wrap: anywhere; }
+  .hero .hero-image-caption { margin-top: .3rem; font-size: clamp(.95rem, 3.8vw, 1.12rem); }
+  .hero.has-hero-image .hero-image-placeholder { display: none; }
+  .hero .floral-hero-tl { width: clamp(4.4rem, 21vw, 6.2rem); left: -.25rem; top: -.25rem; opacity: .5; }
+  .hero .floral-hero-br { width: clamp(4.9rem, 24vw, 6.9rem); right: -.35rem; bottom: -.5rem; opacity: .45; }
+  .hero[data-subject-side="left"] .floral-hero-tl { left: auto; right: -.25rem; }
+  .hero[data-subject-side="left"] .floral-hero-br { right: auto; left: -.35rem; }
+
+  .countdown-section { min-height: 0; padding: 1.55rem .55rem 1.4rem; }
+  .countdown-wrap { width: 100%; padding-inline: .1rem; }
+  .countdown-wrap .floral-count-left,
+  .countdown-wrap .floral-count-right { display: none; }
+  .countdown-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.2rem, 1.15vw, .4rem); width: 100%; margin-top: .9rem; }
+  .count-card { width: auto; min-width: 0; height: clamp(3.8rem, 16vw, 4.2rem); padding: .25rem .08rem; }
+  .count-card strong { font-size: clamp(1.05rem, 4.5vw, 1.32rem); }
+  .count-card span { font-size: clamp(.61rem, 2.55vw, .73rem); }
+  .placeholder-note { font-size: clamp(.78rem, 3.15vw, .87rem); }
+
+  .schedule-section > h2 { margin-bottom: 1.3rem; }
+  .event-grid { grid-template-columns: minmax(0, 1fr); gap: .8rem; }
+  .event-card,
+  .event-card.location-option { width: 100%; min-height: 0; padding: .95rem .85rem; }
+  .schedule-section .location-options .event-card .event-icon { width: 2.45rem; height: 2.45rem; margin-bottom: .5rem; }
+  .schedule-section .location-options .event-card .event-icon svg { width: 1.35rem; height: 1.35rem; }
+  .schedule-section .location-options .event-card h3 { font-size: clamp(1rem, 3.75vw, 1.12rem); line-height: 1.35; margin-bottom: .5rem; }
+  .schedule-section .location-options .event-card .event-time,
+  .schedule-section .location-options .event-card .event-venue,
+  .schedule-section .location-options .event-card .event-address { font-size: clamp(.87rem, 3.3vw, .95rem); line-height: 1.48; }
+  .schedule-section .location-options .event-card .event-address-parts { margin-top: .32rem; line-height: 1.5; }
+  .schedule-section .location-options .event-card .event-address-part { font-size: clamp(.78rem, 2.95vw, .86rem); }
+  .map-row { grid-template-columns: minmax(0, 1fr); gap: .9rem; margin-top: 1.1rem; }
+  .map-placeholder { min-height: clamp(12rem, 52vw, 16rem); padding: .8rem; }
+  .map-placeholder-state { padding: 1rem .75rem; gap: .65rem; flex-direction: column; }
+  .map-placeholder iframe { min-height: 12rem; }
+  .map-copy { padding: .25rem .1rem; }
+  .map-copy h3 { font-size: 1.12rem; }
+  .map-copy p { font-size: .9rem; line-height: 1.55; }
+  .map-copy .map-location-address-part { font-size: .82rem; }
+
+  .story-section { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; padding: clamp(1.2rem, 4vw, 1.8rem); }
+  .story-copy, .story-visual { width: 100%; max-width: 100%; min-width: 0; }
+  .story-copy h2 { font-size: var(--type-heading); margin-bottom: .7rem; }
+  .story-copy p:not(.section-kicker) { font-size: var(--type-body); line-height: 1.62; }
+  .story-copy .subtle-copy, .subtle-copy { font-size: var(--type-small); }
+  .story-visual.story-gallery-trigger { min-height: 22rem; padding: .2rem 0 3.9rem; }
+  .story-visual.story-gallery-trigger > .photo-story { width: min(70%, 19rem); height: clamp(13rem, 56vw, 14.1rem); margin-top: .15rem; }
+  .story-visual.story-gallery-trigger > .photo-story-small { right: clamp(.55rem, 3.5vw, .8rem); bottom: 3.85rem; width: clamp(6.25rem, 30%, 7.25rem); height: clamp(7.75rem, 34vw, 8.5rem); }
+  .story-visual.story-gallery-trigger > .story-gallery-hint { bottom: .2rem; max-width: calc(100% - .5rem); padding: .4rem .6rem; font-size: clamp(.75rem, 3.2vw, .875rem); }
+  .story-visual.story-gallery-trigger > .story-floral { width: clamp(4.6rem, 12vw, 5.6rem); left: .35rem; bottom: 2.15rem; }
+  .story-visual.story-gallery-trigger > .story-floral-petal { width: clamp(2.7rem, 7vw, 3.4rem); right: .45rem; top: .15rem; }
+
+  .gallery-section { padding-block: 1.9rem; }
+  .gallery-frame { padding: .7rem; }
+  .gallery-heading { align-items: flex-start; gap: .45rem; margin-bottom: .85rem; }
+  .gallery-heading h2 { font-size: var(--type-heading); }
+  .gallery-count { font-size: .78rem; }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(4rem, 17vw, 5.8rem); gap: .4rem; }
+  .gallery-item--wide, .gallery-item--wide-short { grid-column: span 2; grid-row: span 2; }
+  .gallery-item--tall, .gallery-item--tall-small, .gallery-item--portrait { grid-column: span 1; grid-row: span 3; }
+  .gallery-item--square, .gallery-item--medium { grid-column: span 1; grid-row: span 2; }
+  .gallery-photo { padding: .28rem; }
+  .gallery-photo strong { font-size: var(--type-label); }
+  .gallery-photo small { font-size: var(--type-small); overflow-wrap: anywhere; }
+  .gallery-floral { width: clamp(6rem, 20vw, 8rem); right: -1.5rem; bottom: -1.5rem; opacity: .12; }
+
+  .rsvp-hero { min-height: 0; padding: 2.25rem .8rem 1.8rem; }
+  .rsvp-hero h1 { font-size: clamp(2.65rem, 12vw, 4rem); }
+  .rsvp-hero > p:not(.section-kicker) { font-size: .95rem; line-height: 1.55; }
+  .rsvp-hero .rsvp-intro { max-width: 32rem; font-size: .82rem; }
+  .rsvp-hero .rsvp-hero-left, .rsvp-hero .rsvp-hero-right { width: clamp(5.5rem, 22vw, 8rem); opacity: .45; }
+  .rsvp-form-section { padding-block: 2rem; }
+  .section-heading-centered { margin-bottom: 1.15rem; }
+  .section-heading-centered > p:last-child { font-size: var(--type-small); }
+  .rsvp-layout, .guestbook-layout { grid-template-columns: minmax(0, 1fr); gap: .9rem; }
+  .form-grid.two-col, .two-col, .form-inline-row { grid-template-columns: minmax(0, 1fr); gap: .8rem; }
+  .form-card { min-width: 0; padding: .9rem; border-radius: .75rem; }
+  .form-card label, .wish-form > label { font-size: var(--type-small); line-height: 1.48; }
+  .form-card input:not([type="radio"]), .form-card textarea, .form-card select, .wish-form input, .wish-form textarea { font-size: 1rem; padding: .7rem .75rem; }
+  .form-card .attend-fieldset { min-width: 0; }
+  .form-card .attend-fieldset .radio-line { gap: .5rem; align-items: flex-start; }
+  .form-card .attend-fieldset .radio-line > span { font-size: var(--type-small); line-height: 1.42; }
+  .guest-count-label { min-width: 0; }
+  .guest-count-label select { width: 100%; }
+  .thankyou-card { min-height: 15rem; padding: 1.6rem 1rem; }
+  .guestbook-section { width: calc(100% - .85rem); padding: 1.2rem .8rem; margin-bottom: 2.2rem; border-radius: .85rem; }
+  .guestbook-heading { align-items: flex-start; flex-direction: column; gap: .45rem; }
+  .guestbook-heading h2 { font-size: var(--type-heading); }
+  .guestbook-heading p { font-size: var(--type-small); }
+  .status-pill { white-space: normal; font-size: .75rem; }
+  .guestbook-form-col { position: static; max-width: 100%; }
+  .wish-form { padding: .85rem; margin-bottom: 0; gap: .8rem; }
+  .wish-form textarea { min-height: 6.5rem; }
+  .wish-actions { align-items: stretch; flex-direction: column; gap: .7rem; }
+  .wish-actions .char-count { text-align: right; }
+  .wish-actions .accent-button { width: 100%; justify-content: center; }
+  .wishes-grid, .wishes-list { grid-template-columns: minmax(0, 1fr); max-height: none; overflow-y: visible; padding-right: 0; }
+  .wish-card { padding: .9rem; }
+  .guestbook-floral-bl, .guestbook-floral-br { display: none; }
+  .site-footer { padding: 1.35rem .7rem max(2rem, env(safe-area-inset-bottom)); }
+  .site-footer p { font-size: 1.05rem; }
+  .toast { right: .65rem; left: .65rem; bottom: max(.7rem, env(safe-area-inset-bottom)); max-width: none; padding: .75rem .9rem; font-size: .85rem; }
+}
+
+/* Content-fit correction for narrow tablets: stack only the hero. */
+@media (max-width: 650px) and (min-width: 551px) {
+  .hero.section-shell {
+    display: block;
+    min-height: 0;
+    padding: clamp(1.8rem, 4.5vw, 2.2rem) clamp(.75rem, 2.5vw, 1.1rem) 1.2rem;
+  }
+  .hero .hero-copy { width: 100%; max-width: 100%; padding: 0; }
+  .hero .hero-image-placeholder { width: min(100%, 17rem); min-height: 0; margin: .9rem auto 0; padding: .35rem; }
+  .hero .hero-image-caption { font-size: 1rem; margin-top: .3rem; }
+  .hero .floral-hero-tl { width: 6rem; }
+  .hero .floral-hero-br { width: 6.7rem; }
+}
+
+/* Very compact phones: supporting text scales down modestly; the mobile name block is stacked in layout-system.css. */
 @media (max-width: 350px) {
-  .story-visual.story-gallery-trigger {
-    min-height: 20.5rem;
-    padding-bottom: 3.7rem;
+  :root {
+    --page-gutter: .35rem;
+    --section-space: 1.9rem;
+    --type-display: 1.1rem;
+    --type-heading: 1.42rem;
+    --type-body: .92rem;
+    --type-small: .79rem;
+    --type-label: .65rem;
+    --type-date: 1rem;
   }
-  .story-visual.story-gallery-trigger > .photo-story {
-    width: min(69%, 17rem);
-    height: 12.75rem;
-  }
-  .story-visual.story-gallery-trigger > .photo-story-small {
-    bottom: 3.7rem;
-    width: 6rem;
-    height: 7.25rem;
-  }
-  .story-visual.story-gallery-trigger > .story-gallery-hint {
-    font-size: .72rem;
-    padding: .35rem .5rem;
-  }
+  .main-nav { gap: .68rem; }
+  .main-nav a { font-size: .65rem; }
+  .section-shell, .hero.section-shell { width: calc(100% - .6rem); }
+  .hero.section-shell { padding-inline: .35rem; }
+  .hero h1.couple-names { gap: .15rem; padding-inline: 0; }
+  .hero h1.couple-names > .couple-name { font-size: 1.04rem; line-height: 1.3; letter-spacing: 0; word-spacing: .08em; }
+  .hero h1.couple-names > .ampersand { font-size: .66rem; margin-inline: .02em; }
+  .hero .intro { font-size: .76rem; line-height: 1.48; }
+  .hero .hero-date-time, .hero .hero-date-lunar { font-size: .82rem; }
+  .hero .hero-date-main { font-size: .96rem; line-height: 1.28; }
+  .hero-family-grid { column-gap: .2rem; }
+  .hero .hero-family-grid .hero-family-label { font-size: .64rem; letter-spacing: .08em; }
+  .hero .hero-family-grid .hero-family-parents { font-size: .79rem; line-height: 1.36; }
+  .hero .hero-family-grid .hero-family-address { font-size: .72rem; line-height: 1.36; }
+  .countdown-grid { gap: .16rem; }
+  .count-card { height: 3.6rem; padding-inline: .04rem; }
+  .count-card strong { font-size: .98rem; }
+  .count-card span { font-size: .58rem; }
+  .schedule-section .location-options .event-card { padding: .85rem .65rem; }
+  .schedule-section .location-options .event-card h3 { font-size: .98rem; }
+  .schedule-section .location-options .event-card .event-time,
+  .schedule-section .location-options .event-card .event-venue,
+  .schedule-section .location-options .event-card .event-address { font-size: .84rem; }
+  .schedule-section .location-options .event-card .event-address-part { font-size: .72rem; }
+  .story-visual.story-gallery-trigger { min-height: 20.5rem; padding-bottom: 3.7rem; }
+  .story-visual.story-gallery-trigger > .photo-story { width: min(69%, 17rem); height: 12.5rem; }
+  .story-visual.story-gallery-trigger > .photo-story-small { bottom: 3.7rem; width: 6rem; height: 7.25rem; }
+  .story-visual.story-gallery-trigger > .story-gallery-hint { font-size: .7rem; padding: .33rem .45rem; }
+  .gallery-frame { padding: .5rem; }
+  .gallery-grid { grid-auto-rows: 3.8rem; gap: .3rem; }
+  .form-card, .wish-form { padding: .75rem; }
+  .guestbook-section { padding: .9rem .6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Invisible form honeypot: kept off-screen rather than display:none so simple bots fill it. */
+.form-honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Real photos replace the old story-area placeholder cards. */
+.story-visual.story-gallery-trigger > img.photo-story,
+.story-visual.story-gallery-trigger > img.photo-story-small {
+  display: block;
+  object-fit: cover;
+  border-radius: .6rem;
+  box-shadow: 0 12px 30px rgba(65, 70, 62, .12);
+}
+.hero-family-item[hidden], .hero-family-parents[hidden], .hero-family-address[hidden],
+.event-card[hidden], .event-time[hidden], .event-venue[hidden], .event-address[hidden],
+.event-address-parts[hidden], .event-address-part[hidden], .map-location-address-parts[hidden],
+.map-location-address-part[hidden], .map-location-time[hidden], .map-location-venue[hidden],
+.map-location-address[hidden], .map-row[hidden], .map-display[hidden] { display: none; }
+
+@media (max-width: 550px) {
+  .hero .hero-rsvp-cta { width: min(100%, 18rem); min-height: 44px; margin-top: .8rem; }
 }

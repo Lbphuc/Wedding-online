@@ -121,7 +121,7 @@
     if (!toastContainer) return;
     const toast = document.createElement('div');
     toast.className = `admin-toast ${type}`;
-    
+
     const icon = document.createElement('span');
     icon.className = 'admin-toast-icon';
     icon.textContent = type === 'success' ? '🌿' : type === 'error' ? '⚠️' : 'ℹ️';

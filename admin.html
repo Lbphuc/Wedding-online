@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
     content="Trang quản trị thiệp cưới — Quản lý RSVP, duyệt lời chúc, thống kê số lượng và xuất CSV.">
@@ -12,10 +13,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;600&family=Lora:wght@400;500&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="styles.css?v=review-fixes-20261021-02">
   <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -25,7 +27,7 @@
     <div class="admin-header-container">
       <div class="admin-brand">
         <a href="index.html" class="admin-brand-logo" aria-label="Xem trang thiệp cưới">
-          <span>N</span><span class="heart">♥</span><span>M</span>
+          <span>T</span><span class="heart">♥</span><span>M</span>
         </a>
         <div class="admin-brand-divider"></div>
         <div class="admin-brand-text">
@@ -327,9 +329,9 @@
   <div id="admin-toast-container" class="admin-toast-container" role="status" aria-live="polite"></div>
 
   <!-- NẠP THƯ VIỆN & SCRIPT -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
-  <script src="admin.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0"></script>
+  <script defer src="supabase-config.js"></script>
+  <script defer src="admin.js"></script>
 </body>
 
 </html>

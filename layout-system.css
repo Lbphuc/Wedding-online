@@ -1,0 +1,379 @@
+/* =====================================================================
+   WEDDING PAGE LOGICAL BLOCK SYSTEM
+   Each .layout-block is a code boundary, not a visible card or border.
+   Reorder sections by changing grid-template-areas in each breakpoint.
+   Existing typography, spacing, colors and component UI remain in the other stylesheets.
+   ===================================================================== */
+
+.page-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "hero"
+    "countdown"
+    "schedule"
+    "story"
+    "gallery"
+    "rsvp"
+    "guestbook";
+  align-content: start;
+  row-gap: 0;
+  min-width: 0;
+}
+
+.page-layout > .layout-block {
+  min-width: 0;
+  /* Grid area is declared by each named block class below. Wrappers remain visually invisible. */
+  outline: 0;
+}
+
+.layout-block--hero { grid-area: hero; }
+.layout-block--countdown { grid-area: countdown; }
+.layout-block--schedule { grid-area: schedule; }
+.layout-block--story { grid-area: story; }
+.layout-block--gallery { grid-area: gallery; }
+.layout-block--rsvp { grid-area: rsvp; }
+.layout-block--guestbook { grid-area: guestbook; }
+
+/* Hero image is now a real HTML block, independent from the text block. */
+.hero.section-shell.has-hero-image {
+  background-image: none;
+  background-color: var(--ds-ivory);
+  border: 0;
+  border-radius: 0;
+  isolation: isolate;
+}
+
+.hero.section-shell.has-hero-image::before {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-media-block {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.hero-media-picture,
+.hero-media-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-media-image {
+  object-fit: cover;
+  object-position: var(--hero-photo-position, center center);
+}
+
+.hero.section-shell.has-hero-image .hero-copy {
+  z-index: 2;
+}
+
+.hero.section-shell.has-hero-image .hero-image-placeholder {
+  display: none;
+}
+
+/* Tablet: use the same named blocks; only dimensions and text spacing change. */
+@media (min-width: 551px) and (max-width: 1099px) {
+  .page-layout {
+    grid-template-areas:
+      "hero"
+      "countdown"
+      "schedule"
+      "story"
+      "gallery"
+      "rsvp"
+      "guestbook";
+  }
+  .hero.section-shell.has-hero-image {
+    min-height: clamp(34rem, 64vw, 42rem);
+  }
+  .hero-media-image {
+    object-position: 54% center;
+  }
+}
+
+/* Mobile: image is the first visual block inside Hero; invitation copy follows it. */
+@media (max-width: 550px) {
+  .page-layout {
+    grid-template-areas:
+      "hero"
+      "countdown"
+      "schedule"
+      "story"
+      "gallery"
+      "rsvp"
+      "guestbook";
+  }
+
+  .hero.section-shell.has-hero-image {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: start;
+    min-height: 0;
+    padding: 0 0 1.25rem;
+    overflow: hidden;
+    background: var(--ds-paper-warm);
+  }
+
+  .hero.section-shell.has-hero-image::before {
+    content: none;
+    display: none;
+  }
+
+  .hero.section-shell.has-hero-image .hero-media-block {
+    position: relative;
+    inset: auto;
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: clamp(23rem, 122vw, 36rem);
+    min-height: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero.section-shell.has-hero-image .hero-media-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--hero-photo-position-mobile, center 38%);
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 1.4rem 1rem .25rem;
+    background: var(--ds-paper-warm);
+    z-index: 2;
+  }
+
+  .hero.section-shell.has-hero-image .floral-hero-tl,
+  .hero.section-shell.has-hero-image .floral-hero-br {
+    display: none;
+  }
+
+  .hero.section-shell.has-hero-image .hero-family-grid { margin-top: .8rem; }
+  .hero.section-shell.has-hero-image .text-link { margin-top: .75rem; }
+}
+
+/* =====================================================================
+   MOBILE COUPLE-NAMES LAYOUT
+   Keep the names as one logical HTML block. On phones, only its internal
+   visual arrangement changes: groom name / ampersand / bride name.
+   No borders or additional visual containers are introduced.
+   ===================================================================== */
+@media (max-width: 550px) {
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    align-items: center;
+    justify-items: center;
+    gap: 0;
+    width: 100%;
+    margin: .35rem auto .3rem;
+    padding: 0;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .couple-name {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    justify-self: center;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    line-height: 1.12;
+    letter-spacing: -.015em;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .couple-name:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .ampersand {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    margin: .05rem 0 .08rem;
+    font-size: clamp(.78rem, 3.2vw, .98rem);
+    line-height: 1;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .couple-name:last-child {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+/* =====================================================================
+   MOBILE TYPOGRAPHY EMPHASIS
+   Make the invitation hierarchy clearer on phones without adding visible
+   borders/cards or changing the logical-block structure.
+   ===================================================================== */
+@media (max-width: 550px) {
+  .hero.section-shell.has-hero-image .hero-copy > .eyebrow {
+    margin-bottom: .55rem;
+    color: #5c715f;
+    font-size: clamp(.82rem, 3.5vw, .92rem);
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: .19em;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .couple-name {
+    color: #214638;
+    /* Let the names be the visual focal point, like a printed wedding invitation.
+       Each name occupies its own row on mobile, so it no longer needs to shrink
+       to make both names fit side-by-side. */
+    font-size: clamp(2.45rem, 11.2vw, 3.65rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -.018em;
+    text-shadow:
+      .35px 0 currentColor,
+      -.35px 0 currentColor,
+      0 2px 0 rgba(255, 255, 255, .62),
+      0 5px 13px rgba(35, 68, 54, .12);
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .ampersand {
+    color: #9a6f4b;
+    font-size: clamp(.86rem, 3.5vw, 1rem);
+    font-weight: 600;
+    margin-block: .08rem .12rem;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy > .intro {
+    max-width: 34rem;
+    margin: .72rem auto .58rem;
+    color: #435d50;
+    font-size: clamp(.98rem, 4vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.62;
+    letter-spacing: .005em;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .divider-heart {
+    margin: .68rem auto .82rem;
+    gap: .8rem;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .divider-heart span {
+    width: clamp(2.3rem, 9vw, 3rem);
+    background: #c9ad92;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .divider-heart b {
+    color: #806044;
+    font-size: .9rem;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .hero-date-time {
+    color: #4c6556;
+    font-size: clamp(.98rem, 3.9vw, 1.06rem);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .hero-date-main {
+    color: #243f34;
+    font-size: clamp(1.08rem, 4.3vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.36;
+    letter-spacing: .005em;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .hero-date-lunar {
+    color: #5e6e61;
+    font-size: clamp(.94rem, 3.75vw, 1rem);
+    font-weight: 500;
+    line-height: 1.48;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .hero-family-grid {
+    margin-top: .82rem;
+    column-gap: clamp(.35rem, 1.8vw, .65rem);
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .hero-family-label {
+    color: #89684d;
+    font-size: clamp(.76rem, 3.1vw, .84rem);
+    font-weight: 700;
+    letter-spacing: .13em;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .hero-family-parents {
+    color: #2e4a3d;
+    font-size: clamp(.9rem, 3.7vw, .98rem);
+    font-weight: 600;
+    line-height: 1.46;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy .hero-family-address {
+    color: #5f7064;
+    font-size: clamp(.82rem, 3.3vw, .9rem);
+    line-height: 1.45;
+  }
+}
+
+/* =====================================================================
+   DESKTOP COUPLE-NAMES BALANCE
+   Use equal side columns so the ampersand shares the same center axis as
+   the heart divider below. This is a logical layout change only; no visible
+   borders or containers are introduced. Mobile keeps its stacked layout.
+   ===================================================================== */
+@media (min-width: 1100px) {
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: baseline;
+    justify-items: stretch;
+    column-gap: clamp(.35rem, .85vw, .9rem);
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .couple-name:first-child {
+    grid-column: 1;
+    justify-self: stretch;
+    text-align: right;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .ampersand {
+    grid-column: 2;
+    justify-self: center;
+    align-self: baseline;
+    margin: 0;
+    text-align: center;
+  }
+
+  .hero.section-shell.has-hero-image .hero-copy h1.couple-names > .couple-name:last-child {
+    grid-column: 3;
+    justify-self: stretch;
+    text-align: left;
+  }
+}

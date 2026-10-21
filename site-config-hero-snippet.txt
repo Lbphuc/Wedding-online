@@ -1,13 +1,17 @@
-Thêm các thuộc tính dưới đây bên trong object window.WEDDING_CONFIG trong site-config.js (ví dụ ngay sau brideInitial). Nếu bạn dùng full project ZIP thì các thuộc tính đã có sẵn.
+CẤU HÌNH HERO HIỆN TẠI (các giá trị đã có sẵn trong site-config.js)
 
-  // Ảnh ngang làm background cho toàn bộ Hero.
-  heroImage: "assets/images/wedding-hero.jpg",
-  // 70% chiều ngang dành cho thông tin; khoảng 30% còn lại là vùng nhấn mạnh chủ thể trong ảnh. Hợp lệ từ 60% đến 80%.
-  heroInfoWidth: "70%",
-  // "right": cặp đôi bên phải, thông tin bên trái; "left": cặp đôi bên trái, thông tin tự chuyển sang phải.
-  heroSubjectSide: "right",
-  // Để trống để tự căn; ví dụ override: "70% center".
-  heroBackgroundPosition: "",
-  heroMobileBackgroundPosition: "",
+heroImage: "assets/images/wedding-hero.jpg"          // ảnh ngang trên desktop
+heroMobileImage: "assets/images/wedding-mobile.jpg"  // ảnh riêng hiển thị phía trên trên mobile
+heroInfoWidth: "70%"                                  // vùng nội dung desktop, hợp lệ 60%-80%
+heroSubjectSide: "right"                              // chủ thể ở phải, phần thông tin ở trái
+heroBackgroundPosition: "left center"                 // căn ảnh desktop
+heroMobileBackgroundPosition: "center center"         // căn ảnh mobile để giữ chủ thể trong khung
 
-Lưu ý: để tên cô dâu/chú rể ở cùng một hàng trên desktop và tự co cỡ chữ theo màn hình. Trên màn hình cực hẹp, cần kiểm tra với tên thật dài. Nếu chưa có ảnh trong assets/images/wedding-hero.jpg, hãy để heroImage: "".
+Tên cô dâu/chú rể nằm cùng một hàng trên desktop và thành hai hàng, dấu & ở giữa trên mobile. JavaScript chỉ tự căn cỡ chữ cho desktop; mobile giữ cỡ chữ riêng để không bị thu nhỏ theo tổng chiều rộng hai tên.
+
+CÁC DÒNG NGÀY GIỜ
+- eventTimeDisplay: dòng giờ tổ chức
+- dateDisplay: ngày dương lịch (dòng chính, in đậm)
+- lunarDateDisplay: ngày âm lịch
+
+Chỉnh các giá trị trong site-config.js để cập nhật thông tin. Để trống trường chưa chốt; trang sẽ ẩn trường/địa điểm đó thay vì hiển thị placeholder cho khách.
