@@ -18,11 +18,11 @@ window.WEDDING_CONFIG = {
   // Vị trí riêng trên mobile; để trống để tự căn theo heroSubjectSide.
   heroMobileBackgroundPosition: "center center",
   // Ba dòng thời gian ở khu vực thiệp chính.
-  eventTimeDisplay: "Được tổ chức vào 10 giờ 00",
+  eventTimeDisplay: "Được tổ chức vào 10 giờ 30",
   dateDisplay: "CHỦ NHẬT, NGÀY 29 THÁNG 11 NĂM 2026",
   lunarDateDisplay: "Tức ngày 21 tháng 10 năm Bính Ngọ",
   // English versions displayed when the visitor selects EN.
-  eventTimeDisplayEn: "The ceremony begins at 10:00 AM",
+  eventTimeDisplayEn: "The ceremony begins at 10:30 AM",
   dateDisplayEn: "SUNDAY, NOVEMBER 29, 2026",
   lunarDateDisplayEn: "Lunar date: the 21st day of the 10th lunar month, Year of the Horse",
   // Ngày minh họa để đồng hồ countdown chạy. Hãy thay khi đã chốt ngày cưới.
@@ -56,7 +56,7 @@ window.WEDDING_CONFIG = {
   // vào từng box tương ứng; trường để trống sẽ không tạo placeholder giả trên giao diện.
   eventLocations: {
     groomReception: {
-      time: "10:00 · 29/11/2026",
+      time: "10:30 · 29/11/2026",
       venue: "",
       hamlet: "Tùng Lâm",
       commune: "Tân Châu",
@@ -66,7 +66,7 @@ window.WEDDING_CONFIG = {
       mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d973.6642764518383!2d105.56728551625493!3d18.937481217129566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313763001b0a3075%3A0x8e496874cc82ccbe!2zU8OibiBiw7NuZyB4w7NtIDUgdMOieSB0aOG7jQ!5e0!3m2!1svi!2s!4v1792677919650!5m2!1svi!2s"
     },
     ceremony: {
-      time: "",
+      time: "09:30 - 28/10/2026",
       venue: "Tư gia nhà gái",
       hamlet: "Hải Đông",
       commune: "Diễn Châu",
