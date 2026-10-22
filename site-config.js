@@ -41,9 +41,9 @@ window.WEDDING_CONFIG = {
   // THÔNG TIN NHÀ GÁI TRÊN HERO: điền tên bố/mẹ và địa chỉ tại đây.
   // Khối NHÀ GÁI vẫn hiển thị sẵn; các giá trị đang để trống là chỗ chờ bạn cập nhật.
   // Nhãn Bố/Mẹ hoặc Dad/Mom nằm trong script.js và tự đổi theo ngôn ngữ.
-  brideDad: "",
-  brideMom: "",
-  brideFamilyAddress: "",
+  brideDad: "Nguyễn Minh Hồng",
+  brideMom: "Thái Thị Khánh Hậu",
+  brideFamilyAddress: "Xóm Hải Đông - Xã Diễn Châu - Tỉnh Nghệ An",
   groomDad: "Lưu Lương Điền",
   groomMom: "Phạm Thị Lý",
   groomFamilyAddress: "Xóm Tùng Lâm - Xã Tân Châu - Tỉnh Nghệ An",
@@ -62,28 +62,28 @@ window.WEDDING_CONFIG = {
       commune: "Tân Châu",
       province: "Nghệ An",
       address: "",
-      mapUrl: "https://maps.app.goo.gl/3XKnttL4RPGCPNcYA",
-      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d276.11420006183016!2d105.56943191722083!3d18.934885059615347!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDU2JzA1LjgiTiAxMDXCsDM0JzEwLjQiRQ!5e0!3m2!1svi!2s!4v1791895921286!5m2!1svi!2s"
+      mapUrl: "https://maps.app.goo.gl/HqGPnARgWKSCpEuGA",
+      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d973.6642764518383!2d105.56728551625493!3d18.937481217129566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313763001b0a3075%3A0x8e496874cc82ccbe!2zU8OibiBiw7NuZyB4w7NtIDUgdMOieSB0aOG7jQ!5e0!3m2!1svi!2s!4v1792677919650!5m2!1svi!2s"
     },
     ceremony: {
       time: "",
-      venue: "",
-      hamlet: "",
-      commune: "",
-      province: "",
+      venue: "Tư gia nhà gái",
+      hamlet: "Hải Đông",
+      commune: "Diễn Châu",
+      province: "Nghệ An",
       address: "",
       mapUrl: "",
       mapEmbedUrl: ""
     },
     brideReception: {
-      time: "",
-      venue: "",
-      hamlet: "",
-      commune: "",
-      province: "",
+      time: "16:00 - 28/11/2026",
+      venue: "Khách sạn Minh Phú Diamond Palace",
+      hamlet: "Ngọc Tân",
+      commune: "Diễn Châu",
+      province: "Nghệ An",
       address: "",
-      mapUrl: "",
-      mapEmbedUrl: ""
+      mapUrl: "https://maps.app.goo.gl/CQd5x6Jt7meJqwLy8",
+      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.5005760703284!2d105.59355247564699!3d18.997651454426695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31377b46484a5c81%3A0x8d6520c10448cf80!2zS2jDoWNoIFPhuqFuIE1pbmggUGjDuiBEaWFtb25kIFBhbGFjZQ!5e0!3m2!1svi!2s!4v1792677860188!5m2!1svi!2s"
     }
   }
 
