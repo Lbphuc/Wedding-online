@@ -1,0 +1,143 @@
+/* Entrance cover for bride-full. Palette reuses the invitation's existing design tokens. */
+:root {
+  --cover-background: #e5e8d9; /* .countdown-section / --ds-sage */
+  --cover-paper: #f3f2e8;      /* .guestbook-section / --ds-ivory */
+  --cover-ink: #41463e;
+  --cover-olive: #58644d;
+  --cover-forest: #294b40;
+  --cover-border: #d6d4c5;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body.envelope-body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(.8rem, 3.5vw, 2rem);
+  overflow-x: hidden;
+  background: var(--cover-background);
+  color: var(--cover-ink);
+  font-family: "Lora", Georgia, serif;
+}
+.cover-screen {
+  width: 100%;
+  min-height: calc(100vh - 2rem);
+  min-height: calc(100svh - 2rem);
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+}
+.invitation-card {
+  width: min(100%, 660px);
+  min-height: clamp(430px, 58vh, 470px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.2rem, 4vw, 2.8rem) 2rem;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--cover-paper);
+  border: 1px solid rgba(214, 212, 197, .78);
+  border-radius: 12px;
+  box-shadow: 0 22px 56px rgba(65, 70, 62, .18);
+  text-align: center;
+  animation: cover-rise .7s cubic-bezier(.2, .75, .25, 1) both;
+}
+.cover-flower {
+  position: absolute;
+  z-index: -1;
+  width: clamp(150px, 27vw, 245px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  opacity: .88;
+}
+.cover-flower-tl { top: -18px; left: -22px; }
+.cover-flower-br { right: -22px; bottom: -24px; transform: rotate(180deg); }
+.cover-seal {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin: 0 0 1rem;
+  border-radius: 50%;
+  color: var(--cover-paper);
+  background: var(--cover-olive);
+  box-shadow: 0 8px 20px rgba(65, 70, 62, .22);
+  font: 27px/1 Georgia, serif;
+}
+.cover-kicker {
+  margin: .1rem 0 .18rem;
+  color: var(--cover-forest);
+  font: 600 clamp(.86rem, 1.65vw, 1rem)/1.5 "Lora", Georgia, serif;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.cover-card h1, .invitation-card h1 {
+  margin: 0;
+  color: var(--cover-forest);
+  font: 600 clamp(2.4rem, 5.3vw, 3.15rem)/1.06 "Cormorant Garamond", Georgia, serif;
+  letter-spacing: .025em;
+}
+.cover-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+  margin: .8rem auto .65rem;
+  color: var(--cover-olive);
+}
+.cover-divider span { width: 42px; height: 1px; background: var(--cover-olive); opacity: .75; }
+.cover-divider b { font-size: .78rem; font-weight: 400; }
+.cover-couple { color: var(--cover-olive); line-height: 1.1; }
+.cover-couple p { margin: 0; font: 500 clamp(1.8rem, 4vw, 2.3rem)/1.05 "Cormorant Garamond", Georgia, serif; }
+.cover-ampersand { display: block; margin: .04rem 0; font: 500 1.15rem/1.05 "Cormorant Garamond", Georgia, serif; }
+.cover-date { margin: .7rem 0 1rem; color: #777d65; font: 500 clamp(1rem, 2vw, 1.2rem)/1.5 "Cormorant Garamond", Georgia, serif; }
+.open-invitation {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: .7rem;
+  min-width: 154px;
+  min-height: 48px;
+  padding: .7rem 1.6rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--cover-paper);
+  background: var(--cover-olive);
+  box-shadow: 0 7px 16px rgba(65, 70, 62, .22);
+  font: 600 1rem/1.2 "Cormorant Garamond", Georgia, serif;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.open-invitation:hover { transform: translateY(-2px); background: #46523d; box-shadow: 0 10px 22px rgba(65, 70, 62, .25); }
+.open-invitation:focus-visible { outline: 3px solid var(--cover-forest); outline-offset: 4px; }
+.cover-footer { margin: 1rem 0 0; color: rgba(65, 70, 62, .62); font-size: .75rem; letter-spacing: .06em; text-align: center; }
+.cover-footer span { color: #a87a79; padding-inline: .25rem; }
+.cover-petal { position: absolute; z-index: -1; width: 9px; height: 9px; border-radius: 45% 55% 50% 50%; background: #c98e8d; opacity: .72; transform: rotate(35deg); }
+.cover-petal-one { top: 9%; left: 8%; }
+.cover-petal-two { right: 12%; top: 36%; width: 13px; height: 13px; }
+.cover-petal-three { left: 36%; bottom: 8%; width: 11px; height: 11px; }
+@keyframes cover-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 550px) {
+  body.envelope-body { padding: .7rem; }
+  .cover-screen { min-height: calc(100svh - 1.4rem); }
+  .invitation-card { min-height: min(555px, calc(100svh - 4rem)); min-height: min(555px, calc(100dvh - 4rem)); padding: 2rem .85rem 1.55rem; border-radius: 10px; }
+  .cover-flower { width: clamp(128px, 38vw, 185px); opacity: .83; }
+  .cover-flower-tl { top: -12px; left: -18px; }
+  .cover-flower-br { right: -18px; bottom: -20px; }
+  .cover-seal { width: 54px; height: 54px; margin-bottom: .9rem; font-size: 24px; }
+  .cover-kicker { max-width: 100%; font-size: clamp(.78rem, 3.5vw, .9rem); letter-spacing: .085em; }
+  .invitation-card h1 { font-size: clamp(2.2rem, 9vw, 2.8rem); }
+  .cover-couple p { font-size: clamp(1.65rem, 7.2vw, 2rem); }
+  .cover-date { margin-top: .6rem; }
+  .cover-footer { font-size: .68rem; }
+}
+@media (prefers-reduced-motion: reduce) { .invitation-card { animation: none; } .open-invitation { transition: none; } }

@@ -1,0 +1,1162 @@
+/* ==============================================================================
+   ADMIN DASHBOARD STYLESHEET - THIỆP CƯỚI ONLINE
+   Theme: Romantic Elegant · Tối ưu quản trị · Dễ đọc & Responsive
+   ============================================================================== */
+
+:root {
+  --admin-bg: #f9f6f0;
+  --admin-card: #ffffff;
+  --admin-ink: #2b3d35;
+  --admin-ink-muted: #6f7d75;
+  --admin-ink-faint: #9ea8a2;
+  --admin-line: #e6dfd5;
+  --admin-line-light: #f2ece3;
+  --admin-sage: #496b5e;
+  --admin-sage-dark: #375348;
+  --admin-sage-soft: #eaf2ed;
+  --admin-rose: #d98e91;
+  --admin-rose-dark: #b86b6e;
+  --admin-rose-soft: #fcf1f2;
+  --admin-amber: #b47818;
+  --admin-amber-soft: #fef7ec;
+  --admin-red: #c24848;
+  --admin-red-soft: #fdf0f0;
+  --admin-shadow-sm: 0 2px 6px rgba(43, 61, 53, 0.04);
+  --admin-shadow: 0 8px 24px rgba(43, 61, 53, 0.06);
+  --admin-shadow-lg: 0 16px 40px rgba(43, 61, 53, 0.1);
+  --admin-radius-sm: 8px;
+  --admin-radius: 14px;
+  --admin-radius-lg: 20px;
+  --admin-font-title: 'Cormorant Garamond', Georgia, serif;
+  --admin-font-body: 'Lora', Georgia, serif;
+  --admin-font-ui: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Standalone fallback scale for Admin; public-page typography lives in design-system.css. */
+  --type-display: clamp(1.15rem, 1rem + 1.6vw, 3.15rem);
+  --type-heading: clamp(1.9rem, 1.55rem + 1.15vw, 2.65rem);
+  --type-subheading: clamp(1.125rem, 1.05rem + .3vw, 1.35rem);
+  --type-body: clamp(.9375rem, .91rem + .15vw, 1rem);
+  --type-small: clamp(.8125rem, .78rem + .12vw, .9rem);
+  --type-label: clamp(.7rem, .67rem + .12vw, .78rem);
+  --type-date: clamp(1.05rem, .98rem + .72vw, 1.65rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body.admin-body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--admin-bg);
+  color: var(--admin-ink);
+  font-family: var(--admin-font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   1. HEADER QUẢN TRỊ
+   -------------------------------------------------------------------------- */
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--admin-line);
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.admin-header-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--admin-ink);
+}
+
+.admin-brand-logo {
+  font-family: 'Allura', cursive;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--admin-sage);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.admin-brand-logo span.heart {
+  color: var(--admin-rose);
+  font-size: 16px;
+}
+
+.admin-brand-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--admin-line);
+}
+
+.admin-brand-text h1 {
+  margin: 0;
+  font-family: var(--admin-font-title);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--admin-ink);
+  letter-spacing: 0.5px;
+}
+
+.admin-brand-text p {
+  margin: 0;
+  font-size: 11px;
+  color: var(--admin-ink-muted);
+  font-family: var(--admin-font-ui);
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-view-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  color: var(--admin-sage);
+  text-decoration: none;
+  font-family: var(--admin-font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-view-site:hover {
+  background: var(--admin-sage-soft);
+  border-color: var(--admin-sage);
+}
+
+.admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px;
+  background: var(--admin-bg);
+  border-radius: 999px;
+  border: 1px solid var(--admin-line);
+  font-family: var(--admin-font-ui);
+}
+
+.admin-user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--admin-sage);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.admin-user-email {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--admin-ink);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--admin-radius-sm);
+  background: transparent;
+  border: 1px solid var(--admin-line);
+  color: var(--admin-red);
+  font-family: var(--admin-font-ui);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: var(--admin-red-soft);
+  border-color: var(--admin-red);
+}
+
+/* --------------------------------------------------------------------------
+   2. KHU VỰC ĐĂNG NHẬP (LOGIN VIEW)
+   -------------------------------------------------------------------------- */
+.login-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 75px);
+  padding: 40px 20px;
+  background: radial-gradient(circle at 50% 20%, rgba(217, 142, 145, 0.08) 0%, transparent 60%),
+              radial-gradient(circle at 80% 80%, rgba(73, 107, 94, 0.06) 0%, transparent 50%),
+              var(--admin-bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-lg);
+  padding: 42px 36px;
+  box-shadow: var(--admin-shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--admin-sage), var(--admin-rose));
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--admin-sage-soft);
+  color: var(--admin-sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.login-header h2 {
+  margin: 0 0 8px;
+  font-family: var(--admin-font-title);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--admin-ink);
+}
+
+.login-header p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--admin-ink-muted);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.form-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--admin-ink);
+  font-family: var(--admin-font-ui);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  background: #fff;
+  color: var(--admin-ink);
+  font-family: var(--admin-font-ui);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--admin-sage);
+  box-shadow: 0 0 0 3px rgba(73, 107, 94, 0.12);
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--admin-ink-faint);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-password-btn:hover {
+  color: var(--admin-ink);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--admin-sage);
+  color: #fff;
+  border: none;
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(73, 107, 94, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--admin-sage-dark);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-alert {
+  padding: 10px 14px;
+  border-radius: var(--admin-radius-sm);
+  font-size: 12px;
+  font-family: var(--admin-font-ui);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  display: none;
+}
+
+.login-alert.show {
+  display: flex;
+}
+
+.login-alert.error {
+  background: var(--admin-red-soft);
+  color: var(--admin-red);
+  border: 1px solid rgba(194, 72, 72, 0.2);
+}
+
+.login-footer-note {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--admin-line);
+  font-size: 11px;
+  color: var(--admin-ink-muted);
+  text-align: center;
+  font-family: var(--admin-font-ui);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   3. VÙNG NỘI DUNG CHÍNH (DASHBOARD & DATA PANELS)
+   -------------------------------------------------------------------------- */
+.admin-main {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+}
+
+/* Thẻ chỉ số (Metric Cards) */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.metric-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  padding: 20px 22px;
+  box-shadow: var(--admin-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--admin-shadow);
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.metric-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--admin-ink-muted);
+  font-family: var(--admin-font-ui);
+}
+
+.metric-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.metric-card.total .metric-icon-wrap {
+  background: var(--admin-sage-soft);
+  color: var(--admin-sage);
+}
+
+.metric-card.yes .metric-icon-wrap {
+  background: #e6f6ec;
+  color: #2b7a4b;
+}
+
+.metric-card.no .metric-icon-wrap {
+  background: #f4efea;
+  color: #8c7e72;
+}
+
+.metric-card.guests .metric-icon-wrap {
+  background: var(--admin-rose-soft);
+  color: var(--admin-rose-dark);
+}
+
+.metric-card.pending .metric-icon-wrap {
+  background: var(--admin-amber-soft);
+  color: var(--admin-amber);
+}
+
+.metric-value {
+  font-family: var(--admin-font-title);
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--admin-ink);
+}
+
+.metric-desc {
+  font-size: 11px;
+  color: var(--admin-ink-muted);
+  font-family: var(--admin-font-ui);
+}
+
+/* Thanh điều hướng Tab */
+.tabs-navigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--admin-line);
+  margin-bottom: 22px;
+  padding-bottom: 2px;
+}
+
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--admin-ink-muted);
+  font-family: var(--admin-font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -3px;
+}
+
+.tab-btn:hover {
+  color: var(--admin-ink);
+}
+
+.tab-btn.active {
+  color: var(--admin-sage);
+  border-bottom-color: var(--admin-sage);
+}
+
+.tab-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--admin-line);
+  color: var(--admin-ink-muted);
+}
+
+.tab-btn.active .tab-badge {
+  background: var(--admin-sage-soft);
+  color: var(--admin-sage);
+}
+
+.tab-badge.badge-amber {
+  background: var(--admin-amber-soft);
+  color: var(--admin-amber);
+  border: 1px solid rgba(180, 120, 24, 0.2);
+}
+
+/* Toolbar hành động & bộ lọc */
+.panel-toolbar {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.toolbar-left, .toolbar-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-input-wrap {
+  position: relative;
+  min-width: 260px;
+}
+
+.search-input-wrap input {
+  width: 100%;
+  padding: 8px 12px 8px 34px;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-bg);
+  font-family: var(--admin-font-ui);
+  font-size: 13px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input-wrap input:focus {
+  background: #fff;
+  border-color: var(--admin-sage);
+  box-shadow: 0 0 0 2px rgba(73, 107, 94, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--admin-ink-faint);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.select-filter {
+  padding: 8px 12px;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-bg);
+  color: var(--admin-ink);
+  font-family: var(--admin-font-ui);
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.select-filter:focus {
+  border-color: var(--admin-sage);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #fff;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  color: var(--admin-ink);
+  font-family: var(--admin-font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--admin-bg);
+  border-color: var(--admin-ink-muted);
+}
+
+.btn-export {
+  background: var(--admin-sage-soft);
+  border-color: rgba(73, 107, 94, 0.3);
+  color: var(--admin-sage);
+  font-weight: 600;
+}
+
+.btn-export:hover {
+  background: var(--admin-sage);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   4. BẢNG DỮ LIỆU RSVP
+   -------------------------------------------------------------------------- */
+.table-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: var(--admin-font-ui);
+  font-size: 13px;
+}
+
+.admin-table th {
+  background: #fcfaf6;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: var(--admin-ink-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--admin-line);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--admin-line-light);
+  color: var(--admin-ink);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(249, 246, 240, 0.7);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-yes {
+  background: #e6f6ec;
+  color: #246a40;
+  border: 1px solid rgba(36, 106, 64, 0.15);
+}
+
+.badge-no {
+  background: #f4efea;
+  color: #796d62;
+  border: 1px solid rgba(121, 109, 98, 0.15);
+}
+
+.badge-pending {
+  background: var(--admin-amber-soft);
+  color: var(--admin-amber);
+  border: 1px solid rgba(180, 120, 24, 0.2);
+}
+
+.badge-approved {
+  background: var(--admin-sage-soft);
+  color: var(--admin-sage);
+  border: 1px solid rgba(73, 107, 94, 0.2);
+}
+
+.table-summary {
+  padding: 12px 18px;
+  background: #fcfaf6;
+  border-top: 1px solid var(--admin-line-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--admin-ink-muted);
+  font-family: var(--admin-font-ui);
+}
+
+/* --------------------------------------------------------------------------
+   5. DANH SÁCH SỔ LƯU BÚT (WISHES GRID)
+   -------------------------------------------------------------------------- */
+.wishes-management-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+.wish-admin-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  padding: 18px 20px;
+  box-shadow: var(--admin-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.wish-admin-card:hover {
+  box-shadow: var(--admin-shadow);
+  border-color: #dfd5c8;
+}
+
+.wish-admin-card.is-pending {
+  border-left: 4px solid var(--admin-amber);
+  background: #fffdf9;
+}
+
+.wish-admin-card.is-approved {
+  border-left: 4px solid var(--admin-sage);
+}
+
+.wish-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wish-sender-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wish-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--admin-sage-soft);
+  color: var(--admin-sage);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.wish-sender-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--admin-ink);
+  margin: 0 0 2px;
+  font-family: var(--admin-font-ui);
+}
+
+.wish-time {
+  font-size: 11px;
+  color: var(--admin-ink-muted);
+  margin: 0;
+  font-family: var(--admin-font-ui);
+}
+
+.wish-message-body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #3b4e45;
+  background: rgba(249, 246, 240, 0.6);
+  border-radius: var(--admin-radius-sm);
+  padding: 12px 14px;
+  word-break: break-word;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.wish-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--admin-line-light);
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-approve {
+  background: var(--admin-sage-soft);
+  color: var(--admin-sage);
+  border-color: rgba(73, 107, 94, 0.25);
+}
+
+.btn-approve:hover:not(:disabled) {
+  background: var(--admin-sage);
+  color: #fff;
+}
+
+.btn-unapprove {
+  background: var(--admin-amber-soft);
+  color: var(--admin-amber);
+  border-color: rgba(180, 120, 24, 0.25);
+}
+
+.btn-unapprove:hover:not(:disabled) {
+  background: var(--admin-amber);
+  color: #fff;
+}
+
+.btn-delete {
+  background: var(--admin-red-soft);
+  color: var(--admin-red);
+  border-color: rgba(194, 72, 72, 0.2);
+}
+
+.btn-delete:hover:not(:disabled) {
+  background: var(--admin-red);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   6. CÁC TRẠNG THÁI HỆ THỐNG (LOADING, EMPTY, ERROR)
+   -------------------------------------------------------------------------- */
+.state-box {
+  padding: 48px 24px;
+  text-align: center;
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--admin-font-ui);
+}
+
+.state-icon {
+  font-size: 36px;
+  color: var(--admin-ink-faint);
+}
+
+.state-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-ink);
+  margin: 0;
+}
+
+.state-desc {
+  font-size: 13px;
+  color: var(--admin-ink-muted);
+  max-width: 400px;
+  margin: 0;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--admin-line);
+  border-top-color: var(--admin-sage);
+  border-radius: 50%;
+  animation: adminSpin 0.8s linear infinite;
+}
+
+.spinner-sm {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
+@keyframes adminSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   7. MODAL XÁC NHẬN (CONFIRMATION MODAL)
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(43, 61, 53, 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--admin-card);
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--admin-shadow-lg);
+  text-align: center;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.show .modal-card {
+  transform: scale(1);
+}
+
+.modal-icon-danger {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--admin-red-soft);
+  color: var(--admin-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.modal-title {
+  margin: 0 0 8px;
+  font-family: var(--admin-font-title);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--admin-ink);
+}
+
+.modal-message {
+  margin: 0 0 22px;
+  font-size: 13px;
+  color: var(--admin-ink-muted);
+  line-height: 1.5;
+  font-family: var(--admin-font-ui);
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-danger {
+  background: var(--admin-red);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-danger:hover {
+  background: #a93a3a;
+}
+
+/* --------------------------------------------------------------------------
+   8. TOAST THÔNG BÁO (TOAST ALERTS)
+   -------------------------------------------------------------------------- */
+.admin-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.admin-toast {
+  pointer-events: auto;
+  min-width: 280px;
+  max-width: 400px;
+  background: #fff;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-sm);
+  padding: 12px 16px;
+  box-shadow: var(--admin-shadow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--admin-font-ui);
+  font-size: 13px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.admin-toast.success {
+  border-left: 4px solid var(--admin-sage);
+}
+
+.admin-toast.error {
+  border-left: 4px solid var(--admin-red);
+}
+
+.admin-toast.info {
+  border-left: 4px solid var(--admin-rose);
+}
+
+.admin-toast-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+@media (max-width: 850px) {
+  .admin-header-container {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+  .admin-header-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 6px;
+  }
+  .admin-main {
+    padding: 18px 14px 40px;
+  }
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .panel-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toolbar-left, .toolbar-right {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .search-input-wrap {
+    min-width: 100%;
+  }
+  .toolbar-left select, .toolbar-right button {
+    flex: 1;
+  }
+  .wishes-management-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 550px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .login-card {
+    padding: 30px 20px;
+  }
+}

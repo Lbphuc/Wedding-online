@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tạo mã QR độ phân giải cao dẫn đến website thiệp cưới để in lên thiệp giấy.">
+  <title>Tạo mã QR thiệp cưới</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #24483d;
+      --sage: #597768;
+      --rose: #d98d92;
+      --cream: #faf6ef;
+      --line: #e6d9ca;
+      --muted: #7b887e
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Lora, serif;
+      min-height: 100vh
+    }
+
+    header {
+      background: rgba(255, 253, 249, .96);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px
+    }
+
+    .brand {
+      font-family: Allura, cursive;
+      font-size: 30px;
+      color: var(--sage);
+      text-decoration: none;
+      white-space: nowrap
+    }
+
+    .back {
+      color: var(--sage);
+      text-decoration: none;
+      font-size: 13px
+    }
+
+    main {
+      width: min(1060px, 92vw);
+      margin: 45px auto 70px
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-size: 11px;
+      color: #829183;
+      text-align: center
+    }
+
+    h1 {
+      text-align: center;
+      font: 500 clamp(34px, 4vw, 52px)/1.05 "Cormorant Garamond", serif;
+      margin: 8px 0 12px
+    }
+
+    .lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto 30px;
+      line-height: 1.8;
+      font-size: 14px
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 370px;
+      gap: 24px;
+      align-items: start
+    }
+
+    .panel {
+      background: #fffdf9;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(67, 53, 38, .04)
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--sage);
+      margin-bottom: 9px
+    }
+
+    input {
+      width: 100%;
+      font: 14px Lora, serif;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+      color: var(--ink);
+      outline-color: #91aa9b
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 9px 0 18px
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px
+    }
+
+    button {
+      font: 13px Lora, serif;
+      border: 1px solid var(--sage);
+      border-radius: 999px;
+      padding: 12px 17px;
+      background: var(--sage);
+      color: white;
+      cursor: pointer
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--sage)
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed
+    }
+
+    .qr-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px
+    }
+
+    .qr-paper {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 1;
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #eee5da;
+      border-radius: 8px;
+      display: grid;
+      place-items: center
+    }
+
+    #qr-canvas {
+      width: 100%;
+      height: auto;
+      max-width: 256px;
+      image-rendering: pixelated
+    }
+
+    #qr-placeholder {
+      font-size: 12px;
+      line-height: 1.7;
+      color: #97a096;
+      max-width: 210px
+    }
+
+    #qr-url {
+      width: 100%;
+      overflow-wrap: anywhere;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .qr-note {
+      background: #f4eee5;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 11px;
+      line-height: 1.65;
+      color: #7f8178
+    }
+
+    .status {
+      min-height: 22px;
+      font-size: 12px;
+      color: #9e676b;
+      line-height: 1.6
+    }
+
+    .status.ok {
+      color: #47745d
+    }
+
+    @media(max-width:820px) {
+      main {
+        margin-top: 28px
+      }
+
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .qr-card {
+        order: -1
+      }
+
+      .qr-paper {
+        max-width: 250px
+      }
+
+      header {
+        padding: 14px 4vw
+      }
+    }
+
+    @media print {
+
+      header,
+      .input-panel,
+      .lead,
+      .eyebrow,
+      h1,
+      .print-hide {
+        display: none !important
+      }
+
+      body {
+        background: #fff
+      }
+
+      .layout {
+        display: block
+      }
+
+      .qr-card {
+        padding: 0;
+        border: 0;
+        box-shadow: none
+      }
+
+      .qr-paper {
+        max-width: 75mm;
+        padding: 4mm;
+        border: 0
+      }
+
+      .qr-note,
+      #qr-url {
+        display: none
+      }
+
+      main {
+        margin: 0;
+        width: 100%
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header><a class="brand" href="index.html">T ♥ M</a><a class="back" href="admin.html">← Trở lại Admin</a></header>
+  <main>
+    <p class="eyebrow">THIỆP CƯỚI · QR CODE</p>
+    <h1>Tạo mã QR cho thiệp giấy</h1>
+    <p class="lead">Mã QR sẽ mở website thiệp cưới của bạn trên điện thoại khách mời. Hãy dùng URL HTTPS công khai sau
+      khi website đã được deploy; không dùng địa chỉ localhost.</p>
+    <div class="layout">
+      <section class="panel input-panel">
+        <label for="website-url">Đường dẫn website công khai</label>
+        <input id="website-url" type="url" placeholder="https://ten-thiep-cuoi.vercel.app/" autocomplete="url">
+        <p class="hint">Sau khi deploy, bạn có thể điền URL tại đây hoặc thêm vào thuộc tính
+          <code>publicWebsiteUrl</code> trong <code>site-config.js</code>. QR được tạo ngay trong trình duyệt, không gửi
+          URL đến backend.</p>
+        <div class="buttons">
+          <button id="generate-btn" type="button">Tạo mã QR</button>
+          <button id="clear-btn" type="button" class="secondary">Xóa</button>
+        </div>
+        <p class="status" id="qr-status" role="status" aria-live="polite">Chưa tạo mã QR. Website cần có URL công khai
+          trước khi in.</p>
+        <div class="qr-note">Để in rõ nét, tải SVG nếu phần mềm in hỗ trợ vector; nếu không, tải PNG độ phân giải cao.
+          Hãy thử quét mã bằng ít nhất một điện thoại trước khi in hàng loạt.</div>
+      </section>
+      <section class="panel qr-card">
+        <div class="qr-paper">
+          <canvas id="qr-canvas" width="1024" height="1024" hidden aria-label="Mã QR website thiệp cưới"></canvas>
+          <div id="qr-placeholder">Mã QR sẽ xuất hiện ở đây sau khi bạn nhập URL công khai và nhấn “Tạo mã QR”.</div>
+        </div>
+        <div id="qr-url"></div>
+        <div class="buttons print-hide" style="justify-content:center">
+          <button id="download-png" type="button" disabled>Tải PNG 1024px</button>
+          <button id="download-svg" type="button" disabled class="secondary">Tải SVG</button>
+          <button id="print-btn" type="button" disabled class="secondary">In / Lưu PDF</button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script src="site-config.js?v=hero-date-lines-20261019-01"></script>
+  <script>
+    (() => {
+      const input = document.getElementById('website-url');
+      const canvas = document.getElementById('qr-canvas');
+      const placeholder = document.getElementById('qr-placeholder');
+      const status = document.getElementById('qr-status');
+      const urlLabel = document.getElementById('qr-url');
+      const pngBtn = document.getElementById('download-png');
+      const svgBtn = document.getElementById('download-svg');
+      const printBtn = document.getElementById('print-btn');
+      let currentUrl = '';
+      let currentSvg = '';
+      const configuredUrl = String(window.WEDDING_CONFIG?.publicWebsiteUrl || '').trim();
+      if (configuredUrl) input.value = configuredUrl;
+
+      function isPublicHttpsUrl(raw) {
+        try {
+          const parsed = new URL(raw);
+          return parsed.protocol === 'https:' && parsed.hostname.includes('.') &&
+            !/^(localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0)$/i.test(parsed.hostname) &&
+            !/^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(parsed.hostname);
+        } catch (_) { return false; }
+      }
+      function setStatus(message, ok = false) {
+        status.textContent = message;
+        status.classList.toggle('ok', ok);
+      }
+      function setReady(ready) {
+        pngBtn.disabled = !ready; svgBtn.disabled = !ready; printBtn.disabled = !ready;
+      }
+      async function generate() {
+        const url = input.value.trim();
+        if (!isPublicHttpsUrl(url)) {
+          setReady(false); canvas.hidden = true; placeholder.hidden = false; urlLabel.textContent = '';
+          setStatus('Hãy nhập URL HTTPS công khai hợp lệ. Không dùng localhost, 127.0.0.1 hoặc địa chỉ mạng nội bộ.');
+          return;
+        }
+        if (!window.QRCode || typeof window.QRCode.toCanvas !== 'function') {
+          setStatus('Chưa tải được thư viện QR. Kiểm tra kết nối Internet rồi thử lại.');
+          return;
+        }
+        try {
+          await window.QRCode.toCanvas(canvas, url, {
+            width: 1024, margin: 4, errorCorrectionLevel: 'H',
+            color: { dark: '#183f35', light: '#ffffff' }
+          });
+          currentSvg = await window.QRCode.toString(url, {
+            type: 'svg', width: 1024, margin: 4, errorCorrectionLevel: 'H',
+            color: { dark: '#183f35', light: '#ffffff' }
+          });
+          currentUrl = url;
+          canvas.hidden = false; placeholder.hidden = true;
+          urlLabel.textContent = url;
+          setReady(true); setStatus('Mã QR đã tạo. Hãy thử quét trước khi in.', true);
+        } catch (error) {
+          console.error('[QR] Generate failed:', error);
+          setReady(false); setStatus('Không thể tạo QR với đường dẫn này. Vui lòng kiểm tra URL.');
+        }
+      }
+      document.getElementById('generate-btn').addEventListener('click', generate);
+      document.getElementById('clear-btn').addEventListener('click', () => {
+        input.value = ''; currentUrl = ''; currentSvg = ''; canvas.hidden = true; placeholder.hidden = false;
+        urlLabel.textContent = ''; setReady(false); setStatus('Đã xóa URL.'); input.focus();
+      });
+      input.addEventListener('keydown', (event) => { if (event.key === 'Enter') generate(); });
+      pngBtn.addEventListener('click', () => {
+        if (!currentUrl) return;
+        const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = 'thiep-cuoi-qr-1024.png'; a.click();
+      });
+      svgBtn.addEventListener('click', () => {
+        if (!currentSvg) return;
+        const blob = new Blob([currentSvg], { type: 'image/svg+xml;charset=utf-8' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'thiep-cuoi-qr.svg'; a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+      });
+      printBtn.addEventListener('click', () => window.print());
+    })();
+  </script>
+</body>
+
+</html>

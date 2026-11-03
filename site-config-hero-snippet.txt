@@ -1,0 +1,17 @@
+CẤU HÌNH HERO HIỆN TẠI (các giá trị đã có sẵn trong site-config.js)
+
+heroImage: "assets/images/wedding-hero.jpg"          // ảnh ngang trên desktop
+heroMobileImage: "assets/images/wedding-mobile.jpg"  // ảnh riêng hiển thị phía trên trên mobile
+heroInfoWidth: "70%"                                  // vùng nội dung desktop, hợp lệ 60%-80%
+heroSubjectSide: "right"                              // chủ thể ở phải, phần thông tin ở trái
+heroBackgroundPosition: "left center"                 // căn ảnh desktop
+heroMobileBackgroundPosition: "center center"         // căn ảnh mobile để giữ chủ thể trong khung
+
+Tên cô dâu/chú rể nằm cùng một hàng trên desktop và thành hai hàng, dấu & ở giữa trên mobile. JavaScript chỉ tự căn cỡ chữ cho desktop; mobile giữ cỡ chữ riêng để không bị thu nhỏ theo tổng chiều rộng hai tên.
+
+CÁC DÒNG NGÀY GIỜ
+- eventTimeDisplay: dòng giờ tổ chức
+- dateDisplay: ngày dương lịch (dòng chính, in đậm)
+- lunarDateDisplay: ngày âm lịch
+
+Chỉnh các giá trị trong site-config.js để cập nhật thông tin. Để trống trường chưa chốt; trang sẽ ẩn trường/địa điểm đó thay vì hiển thị placeholder cho khách.

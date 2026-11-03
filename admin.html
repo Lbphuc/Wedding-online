@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Trang quản trị thiệp cưới — Quản lý RSVP, duyệt lời chúc, thống kê số lượng và xuất CSV.">
+  <title>Quản lý thiệp cưới | Admin Dashboard</title>
+
+  <!-- Typography & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;600&family=Lora:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="styles.css?v=review-fixes-20261021-02">
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="admin-body">
+  <!-- HEADER QUẢN TRỊ -->
+  <header class="admin-header">
+    <div class="admin-header-container">
+      <div class="admin-brand">
+        <a href="index.html" class="admin-brand-logo" aria-label="Xem trang thiệp cưới">
+          <span>T</span><span class="heart">♥</span><span>M</span>
+        </a>
+        <div class="admin-brand-divider"></div>
+        <div class="admin-brand-text">
+          <h1>Quản lý thiệp cưới</h1>
+          <p>Khu vực quản trị riêng của ban tổ chức</p>
+        </div>
+      </div>
+
+      <div class="admin-header-actions">
+        <a href="qr-code.html" class="btn-view-site" title="Tạo mã QR để in lên thiệp giấy" target="_blank"
+          rel="noopener">
+          <span>▦ Tạo mã QR</span>
+        </a>
+        <a href="index.html" class="btn-view-site" title="Mở trang thiệp cưới công khai" target="_blank" rel="noopener">
+          <span>← Xem trang thiệp</span>
+        </a>
+
+        <!-- Thông tin tài khoản admin (chỉ hiện sau khi đăng nhập) -->
+        <div id="admin-user-profile" class="admin-user-info" style="display: none;">
+          <div class="admin-user-avatar" id="admin-user-initial">A</div>
+          <span class="admin-user-email" id="admin-user-email">admin@...</span>
+          <button id="btn-logout" class="btn-logout" type="button" title="Đăng xuất khỏi hệ thống">
+            <span>Đăng xuất</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. MÀN HÌNH ĐĂNG NHẬP (HIỂN THỊ KHI CHƯA ĐĂNG NHẬP HOẶC CHƯA XÁC THỰC ADMIN) -->
+  <section id="login-view" class="login-section">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-icon">🔒</div>
+        <h2>Đăng nhập Quản trị</h2>
+        <p>Vui lòng đăng nhập bằng tài khoản quản trị đã được phân quyền trong hệ thống</p>
+      </div>
+
+      <div id="login-alert" class="login-alert" role="alert">
+        <span class="login-alert-icon">⚠️</span>
+        <span id="login-alert-text">Thông tin đăng nhập không chính xác</span>
+      </div>
+
+      <form id="login-form" class="login-form" autocomplete="on">
+        <div class="form-field">
+          <label for="login-email">Email quản trị</label>
+          <div class="input-wrapper">
+            <input id="login-email" name="email" type="email" required placeholder="admin@thiepcuoi.local"
+              autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="login-password">Mật khẩu</label>
+          <div class="input-wrapper">
+            <input id="login-password" name="password" type="password" required placeholder="••••••••"
+              autocomplete="current-password">
+            <button type="button" id="toggle-pwd-btn" class="toggle-password-btn" aria-label="Hiện hoặc ẩn mật khẩu">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <button id="btn-login-submit" class="btn-primary" type="submit">
+          <span class="btn-text">Đăng nhập Dashboard</span>
+        </button>
+      </form>
+
+      <div class="login-footer-note">
+        🛡️ <strong>Bảo mật RLS:</strong> Quyền truy cập và thao tác dữ liệu được bảo vệ nghiêm ngặt ở cấp Database
+        (Supabase Row Level Security).
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. VÙNG DASHBOARD QUẢN TRỊ (HIỂN THỊ SAU KHI ĐÃ ĐĂNG NHẬP VÀ XÁC MINH QUYỀN ADMIN) -->
+  <main id="dashboard-view" class="admin-main" style="display: none;">
+    <!-- KHỐI THẺ THỐNG KÊ (METRICS CARDS) -->
+    <section class="metrics-grid" aria-label="Thống kê tổng quan">
+      <!-- Thẻ 1: Tổng lượt phản hồi -->
+      <article class="metric-card total">
+        <div class="metric-header">
+          <span class="metric-title">Tổng phản hồi</span>
+          <div class="metric-icon-wrap">📋</div>
+        </div>
+        <div class="metric-value" id="metric-total-responses">0</div>
+        <div class="metric-desc">Tổng số lượt gửi form RSVP</div>
+      </article>
+
+      <!-- Thẻ 2: Lượt đồng ý tham dự -->
+      <article class="metric-card yes">
+        <div class="metric-header">
+          <span class="metric-title">Đồng ý tham dự</span>
+          <div class="metric-icon-wrap">✓</div>
+        </div>
+        <div class="metric-value" id="metric-attending-yes">0</div>
+        <div class="metric-desc">Phản hồi "Có, tôi sẽ tham dự"</div>
+      </article>
+
+      <!-- Thẻ 3: Lượt từ chối -->
+      <article class="metric-card no">
+        <div class="metric-header">
+          <span class="metric-title">Từ chối tham dự</span>
+          <div class="metric-icon-wrap">✕</div>
+        </div>
+        <div class="metric-value" id="metric-attending-no">0</div>
+        <div class="metric-desc">Phản hồi "Rất tiếc, tôi không thể..."</div>
+      </article>
+
+      <!-- Thẻ 4: Tổng số người dự kiến (QUY TẮC CỐT LÕI: Chỉ tính guest_count của ai attending = true) -->
+      <article class="metric-card guests">
+        <div class="metric-header">
+          <span class="metric-title">Tổng người dự kiến</span>
+          <div class="metric-icon-wrap">👥</div>
+        </div>
+        <div class="metric-value" id="metric-total-guests">0</div>
+        <div class="metric-desc">Tổng số người (chỉ tính lượt tham dự)</div>
+      </article>
+
+      <!-- Thẻ 5: Lời chúc chờ duyệt -->
+      <article class="metric-card pending">
+        <div class="metric-header">
+          <span class="metric-title">Lời chúc chờ duyệt</span>
+          <div class="metric-icon-wrap">💌</div>
+        </div>
+        <div class="metric-value" id="metric-pending-wishes">0</div>
+        <div class="metric-desc">Chờ duyệt để hiển thị công khai</div>
+      </article>
+    </section>
+
+    <!-- THANH ĐIỀU HƯỚNG TAB -->
+    <nav class="tabs-navigation" aria-label="Phân loại quản lý">
+      <button id="tab-btn-rsvps" class="tab-btn active" type="button">
+        <span>Xác nhận tham dự (RSVP)</span>
+        <span id="badge-rsvps-count" class="tab-badge">0</span>
+      </button>
+      <button id="tab-btn-wishes" class="tab-btn" type="button">
+        <span>Kiểm duyệt sổ lưu bút</span>
+        <span id="badge-wishes-pending" class="tab-badge badge-amber">0</span>
+      </button>
+    </nav>
+
+    <!-- PANEL 1: QUẢN LÝ RSVP -->
+    <section id="panel-rsvps" class="tab-panel active">
+      <!-- Toolbar thao tác RSVP -->
+      <div class="panel-toolbar">
+        <div class="toolbar-left">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input id="rsvp-search-input" type="search" placeholder="Tìm theo họ tên hoặc số điện thoại...">
+          </div>
+
+          <select id="rsvp-filter-attending" class="select-filter" aria-label="Lọc theo trạng thái tham dự">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="yes">Có tham dự</option>
+            <option value="no">Không tham dự</option>
+          </select>
+
+          <select id="rsvp-sort-order" class="select-filter" aria-label="Sắp xếp thời gian">
+            <option value="desc">Mới nhất trước</option>
+            <option value="asc">Cũ nhất trước</option>
+          </select>
+        </div>
+
+        <div class="toolbar-right">
+          <button id="btn-export-rsvps-csv" class="btn-secondary btn-export" type="button"
+            title="Xuất dữ liệu RSVP sang file Excel CSV UTF-8">
+            <span>📥 Xuất CSV (Excel)</span>
+          </button>
+          <button id="btn-refresh-rsvps" class="btn-secondary" type="button" title="Tải lại danh sách phản hồi">
+            <span>🔄 Làm mới</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Khung bảng RSVP -->
+      <div class="table-card">
+        <!-- Trạng thái Loading -->
+        <div id="rsvp-loading-state" class="state-box" style="display: none;">
+          <div class="spinner"></div>
+          <p class="state-desc">Đang tải danh sách xác nhận tham dự...</p>
+        </div>
+
+        <!-- Trạng thái Lỗi -->
+        <div id="rsvp-error-state" class="state-box" style="display: none;">
+          <div class="state-icon">⚠️</div>
+          <h3 class="state-title">Không thể tải dữ liệu RSVP</h3>
+          <p id="rsvp-error-text" class="state-desc">Đã có lỗi xảy ra khi kết nối tới cơ sở dữ liệu.</p>
+          <button id="btn-retry-rsvps" class="btn-secondary" type="button">Thử lại</button>
+        </div>
+
+        <!-- Trạng thái Rỗng -->
+        <div id="rsvp-empty-state" class="state-box" style="display: none;">
+          <div class="state-icon">📭</div>
+          <h3 class="state-title">Chưa có phản hồi nào</h3>
+          <p class="state-desc">Khi khách mời gửi xác nhận tham dự từ thiệp cưới, thông tin sẽ hiển thị tại đây.</p>
+        </div>
+
+        <!-- Bảng hiển thị dữ liệu -->
+        <div id="rsvp-table-wrapper" class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">STT</th>
+                <th>Họ và tên</th>
+                <th>Số điện thoại</th>
+                <th>Tham dự?</th>
+                <th style="text-align: center;">Số người</th>
+                <th>Ghi chú</th>
+                <th>Thời gian gửi</th>
+              </tr>
+            </thead>
+            <tbody id="rsvp-table-body">
+              <!-- Dữ liệu render động bằng admin.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-summary">
+          <span id="rsvp-summary-text">Đang hiển thị 0 phản hồi</span>
+          <span>Dữ liệu được bảo vệ an toàn bằng RLS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 2: QUẢN LÝ SỔ LƯU BÚT -->
+    <section id="panel-wishes" class="tab-panel" style="display: none;">
+      <!-- Toolbar thao tác Sổ lưu bút -->
+      <div class="panel-toolbar">
+        <div class="toolbar-left">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input id="wish-search-input" type="search" placeholder="Tìm theo tên hoặc nội dung lời chúc...">
+          </div>
+
+          <select id="wish-filter-status" class="select-filter" aria-label="Lọc theo trạng thái kiểm duyệt">
+            <option value="pending">Chờ duyệt (Mặc định)</option>
+            <option value="approved">Đã duyệt (Công khai)</option>
+            <option value="all">Tất cả lời chúc</option>
+          </select>
+        </div>
+
+        <div class="toolbar-right">
+          <button id="btn-export-wishes-csv" class="btn-secondary btn-export" type="button"
+            title="Xuất toàn bộ lời chúc sang file Excel CSV UTF-8">
+            <span>📥 Xuất CSV lời chúc</span>
+          </button>
+          <button id="btn-refresh-wishes" class="btn-secondary" type="button" title="Tải lại danh sách lời chúc">
+            <span>🔄 Làm mới</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Trạng thái Loading -->
+      <div id="wishes-loading-state" class="state-box" style="display: none;">
+        <div class="spinner"></div>
+        <p class="state-desc">Đang tải danh sách lời chúc...</p>
+      </div>
+
+      <!-- Trạng thái Lỗi -->
+      <div id="wishes-error-state" class="state-box" style="display: none;">
+        <div class="state-icon">⚠️</div>
+        <h3 class="state-title">Không thể tải danh sách lời chúc</h3>
+        <p id="wishes-error-text" class="state-desc">Đã có lỗi xảy ra khi kết nối tới cơ sở dữ liệu.</p>
+        <button id="btn-retry-wishes" class="btn-secondary" type="button">Thử lại</button>
+      </div>
+
+      <!-- Trạng thái Rỗng -->
+      <div id="wishes-empty-state" class="state-box" style="display: none;">
+        <div class="state-icon">💌</div>
+        <h3 class="state-title">Không có lời chúc nào</h3>
+        <p class="state-desc">Hiện không có lời chúc nào phù hợp với bộ lọc đang chọn.</p>
+      </div>
+
+      <!-- Danh sách thẻ lời chúc -->
+      <div id="wishes-grid" class="wishes-management-grid">
+        <!-- Render động bằng admin.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL XÁC NHẬN HÀNH ĐỘNG XÓA (CONFIRMATION MODAL) -->
+  <div id="confirm-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-title">
+    <div class="modal-card">
+      <div class="modal-icon-danger">🗑️</div>
+      <h3 id="modal-confirm-title" class="modal-title">Xác nhận xóa lời chúc</h3>
+      <p id="modal-confirm-message" class="modal-message">
+        Bạn có chắc chắn muốn xóa lời chúc này không? Hành động này sẽ xóa vĩnh viễn khỏi cơ sở dữ liệu và không thể
+        hoàn tác.
+      </p>
+      <div class="modal-actions">
+        <button id="btn-modal-cancel" class="btn-secondary" type="button">Hủy bỏ</button>
+        <button id="btn-modal-confirm" class="btn-danger" type="button">Xác nhận xóa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTAINER THÔNG BÁO TOAST -->
+  <div id="admin-toast-container" class="admin-toast-container" role="status" aria-live="polite"></div>
+
+  <!-- NẠP THƯ VIỆN & SCRIPT -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0"></script>
+  <script defer src="supabase-config.js"></script>
+  <script defer src="admin.js"></script>
+</body>
+
+</html>

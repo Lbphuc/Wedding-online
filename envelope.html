@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e5e8d9">
+  <meta name="description" content="Thiệp mời lễ thành hôn của Lưu Long Nhật và Nguyễn Thảo My.">
+  <title>Trân trọng kính mời Quý khách | Nhật &amp; My</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="envelope.css?v=bride-cover-20261028-02">
+</head>
+<body class="envelope-body">
+  <main class="cover-screen">
+    <div class="cover-petal cover-petal-one" aria-hidden="true"></div>
+    <div class="cover-petal cover-petal-two" aria-hidden="true"></div>
+    <div class="cover-petal cover-petal-three" aria-hidden="true"></div>
+    <section class="invitation-card" aria-labelledby="cover-invitation-title">
+      <img class="cover-flower cover-flower-tl" src="assets/flowers/01_Hoa_Goc_Trai_Tren.png" alt="" aria-hidden="true" width="600" height="600">
+      <img class="cover-flower cover-flower-br" src="assets/flowers/09_Hoa_Goc_Phai_Duoi.png" alt="" aria-hidden="true" width="600" height="600">
+      <div class="cover-seal" aria-hidden="true">♥</div>
+      <p class="cover-kicker">TRÂN TRỌNG KÍNH MỜI</p>
+      <h1 id="cover-invitation-title">QUÝ KHÁCH</h1>
+      <div class="cover-divider" aria-hidden="true"><span></span><b>♥</b><span></span></div>
+      <div class="cover-couple" aria-label="Lưu Long Nhật và Nguyễn Thảo My">
+        <p data-cover-name="groom">Lưu Long Nhật</p>
+        <span class="cover-ampersand" aria-hidden="true">&amp;</span>
+        <p data-cover-name="bride">Nguyễn Thảo My</p>
+      </div>
+      <p class="cover-date">29 tháng 11, 2026</p>
+      <a class="open-invitation" href="index.html">Mở thiệp <span aria-hidden="true">↗</span></a>
+    </section>
+    <p class="cover-footer">Lưu Long Nhật <span>♥</span> Nguyễn Thảo My</p>
+  </main>
+  <script src="site-config.js?v=invitation-site-bride-20261028-02"></script>
+  <script>
+    (function () {
+      const config = window.WEDDING_CONFIG || {};
+      const groom = document.querySelector('[data-cover-name="groom"]');
+      const bride = document.querySelector('[data-cover-name="bride"]');
+      if (groom && config.groomName) groom.textContent = config.groomName;
+      if (bride && config.brideName) bride.textContent = config.brideName;
+    })();
+  </script>
+</body>
+</html>
